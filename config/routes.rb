@@ -1,4 +1,10 @@
 TodoList::Application.routes.draw do
+
+
+  post "/newProject", :to =>  'project#create'
+  delete ":id/delProject", :to =>  'project#delete'
+  put ":id/editProject", :to =>  'project#update'
+  
   get "task/create"
 
   get "task/delete"
@@ -11,11 +17,7 @@ TodoList::Application.routes.draw do
 
   get "list/update"
 
-  get "project/create"
-
-  get "project/delete"
-
-  get "project/update"
+  
 
   get "create/delete"
 

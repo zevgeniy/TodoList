@@ -8,11 +8,29 @@ min-height:500px;
 
 #projects{
 float: left;
-width: 40%;
+width: 30%;
+border: 2px dashed black;
+position:relative; 
+}
 
+#projects form{
+display:inline;
 }
 
 #tasks{
 float: right;
-width: 59%;
+width: 40%;
+border-top: 2px dashed black;
+border-right: 2px dashed black;
+border-bottom: 2px dashed black;
+position:relative; 
+}
+
+#tasksList{
+position:relative; 
+}
+
+#projectSettings{
+margin-left:50px;
+display:inline;
 }

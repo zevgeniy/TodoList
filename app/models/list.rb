@@ -1,6 +1,6 @@
 class List < ActiveRecord::Base
 
-belogns_to :project
+belongs_to :project
 has_many :tasks
 
 validates :name, :presence => true
