@@ -1,46 +1,15 @@
 TodoList::Application.routes.draw do
 
+  get "/signup", :to => 'user#new', :as => 'signup'
+  post "/signup", :to => 'user#create'
+  
+  post "/signin", :to => 'session#signin', :as => 'signin'
+  post "/signout", :to => 'session#signout', :as => 'signout'
 
   post "/newProject", :to =>  'project#create'
   delete ":id/delProject", :to =>  'project#delete'
   put ":id/editProject", :to =>  'project#update'
   
-  get "task/create"
-
-  get "task/delete"
-
-  get "task/update"
-
-  get "list/create"
-
-  get "list/delete"
-
-  get "list/update"
-
-  
-
-  get "create/delete"
-
-  get "create/update"
-
-  get "user/show"
-
-  get "user/new"
-
-  get "user/create"
-
-  get "user/edit"
-
-  get "user/update"
-
-  get "show/new"
-
-  get "show/create"
-
-  get "show/edit"
-
-  get "show/update"
-
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

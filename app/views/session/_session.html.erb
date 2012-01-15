@@ -1,0 +1,19 @@
+<div id = "loginScreen">
+    	<div id="signinDiv">
+			<%= form_for(:sessions, :url => '/signin') do |f| %>
+				<div class="field">
+				<%= f.label :login,		 'Login/email' %></br>
+				<%= f.text_field :login %>
+				</div>
+				<div class="field">
+				<%= f.label :password %></br>
+				<%= f.password_field :password %>
+				</div>
+				</br>
+				<%= f.submit 'Sing in'%>
+			<% end %>    
+		</div>
+		<div id="signupDiv">
+			New user? <%=link_to 'Sign up!', signup_path %> 
+		</div>
+</div>

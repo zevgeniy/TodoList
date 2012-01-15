@@ -18,4 +18,18 @@ validates :password,:presence => true,
 
 validates :password_confirmation, :presence => true
 
+def self.authenticate login, password
+	user = User.where("email = '#{login}' or login = '#{login}'").first
+	if !user.nil?
+		if password == user.password
+			user
+		else
+			nil
+		end
+	else
+		nil
+	end
+end
+
+
 end

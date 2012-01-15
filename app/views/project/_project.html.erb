@@ -1,1 +1,28 @@
-<h2>Hello</h2>
+		<% for p in current_user.projects%>
+		<div id="project<%=p.id%>">
+			<a href=""><%=p.name%></a>
+			
+			<div id="projectSettings"> 
+			<%= link_to 'x', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete %>
+			<%= link_to_function 'edit', "showEditBox(#{p.id})" %>
+			</div>
+			
+		</div>
+		<div id="formProj<%=p.id%>" style="display:none">
+		<%= form_for(:project, :url => "#{p.id}/editProject",method: :put, :style => 'display:inline') do |f| %>
+		<%= f.text_field :name %>
+		<%= f.submit "Ok" %>
+		<% end %>
+		<%= link_to_function 'cancle', "hideEditBox(#{p.id})", :style => 'margin-left:10px' %>
+		</div>
+		
+		<% end %>
+		</br>
+		<div id="newProj" style="display:none;">
+		<%= form_for(:projects, :url => '/newProject') do |f| %>
+			<%= f.label :name %> <%= f.text_field :name %>
+			<%= f.submit "Add" %>
+		<% end %>
+		<%=link_to_function "Cancel", "hide('newProj')"%>
+		</div>
+		<%=link_to_function "Add project", "show('newProj')"%>
