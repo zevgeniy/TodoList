@@ -10,6 +10,18 @@ TodoList::Application.routes.draw do
   delete ":id/delProject", :to =>  'project#delete'
   put ":id/editProject", :to =>  'project#update'
   
+  post ":id/openProject", :to => "project#open"
+  
+  post "/newTaskList", :to => "list#create"
+  delete ":id/delTaskList", :to => "list#delete"
+  put ":id/editTaskList", :to => "list#update"
+  
+  post ":id/openTaskList", :to => "list#open"
+  
+  post "/newTask", :to => "task#create"
+  delete ":id/delTask", :to => "task#delete"
+  put ":id/editTask", :to => "task#update"
+  
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

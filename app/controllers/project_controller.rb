@@ -23,10 +23,16 @@ class ProjectController < ApplicationController
   	p = Project.find_by_id(params[:id])
   	if !p.nil?
   		p.update_attributes(params[:project])
-  		#flash[:notice] = "name = #{params[:projects][:name]}"
   		redirect_to root_path
   	end
   	
+  end
+  
+  def open
+  	session[:current_project_id] = params[:id]
+  	session[:current_list_id] = nil
+  	current_list = nil
+  	redirect_to root_path
   end
 
 end

@@ -1,3 +1,17 @@
 // Place all the styles related to the List controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#tasksList form{
+display:inline;
+}
+
+#tasksList a{
+text-decoration:none;
+color:black;
+}
+
+#listSettings{
+display:inline;
+float: right;
+}

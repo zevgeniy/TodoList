@@ -1,0 +1,31 @@
+<% if !current_project.nil? %>
+<% for l in @current_project.lists %>
+<div id="ListTask<%= l.id %>">
+	<%= link_to l.name, "#{l.id}/openTaskList", :method => "post"%>
+	
+	<div id="listSettings">
+		<%= link_to 'x', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete %>
+		<%= link_to_function 'edit', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")" %>
+	</div>	
+</div>
+
+<div id="formList<%=l.id%>" style="display:none">
+	<%= form_for(:list, :url => "#{l.id}/editTaskList", :method => :put, :style => 'display:inline') do |f| %>
+		<%= f.text_field :name %>
+		<%= f.submit "Ok" %>	
+	<% end %>
+	<%= link_to_function 'cancle', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :style => 'margin-left:10px' %>
+</div>
+<% end %>
+
+</br>
+		<div id="newList" style="display:none;">
+		<%= form_for(:lists, :url => '/newTaskList') do |f| %>
+			<%= f.label :name %> <%= f.text_field :name %>
+			<%= f.submit "Add" %>
+		<% end %>
+		<%=link_to_function "Cancel", "hide('newList')"%>
+		</div>
+		<%=link_to_function "Add task list", "show('newList')"%>
+
+<% end %>

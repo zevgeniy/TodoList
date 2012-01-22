@@ -2,10 +2,11 @@
 	<% if !signed_in? %>
     	<%= render template: 'session/_session' %>
 	<% else %>
-	<div id="uerData">
+	<div id="userData">
 	<span id="userLogin"> <%= current_user.login %> </span><%= link_to 'Sign out', signout_path, :method => :post %>
 	</div>
-	<div id="projects">
+	<div id="ProjectsAndList">
+	<div id="projects"> 
 		<h2>Projects:</h2>		
 		<p id="notice"><%= notice %></p>
 		<%= render template: 'project/_project' %>		
@@ -13,11 +14,13 @@
 	
 	<div id="tasksList">
 	<h2>Task's list:</h2>
+		<%= render template: 'list/_list' %>		
+	</div>
 	</div>
 	
 	<div id="tasks">
 		<h3>Tasks:</h3>
-		
+		<%= render template: 'task/_task' %>		
 	</div>
 	<% end %>
 </div>

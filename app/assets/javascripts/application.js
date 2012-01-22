@@ -17,6 +17,12 @@ function show(id)
    document.getElementById(id).style.display = "block";
 }
 
+function ShowAndHide(firstId, secondId)
+{
+	document.getElementById(firstId).style.display = "block";
+	document.getElementById(secondId).style.display = "none";
+}
+
 function showEditBox(id)
 {
 	document.getElementById("formProj" + id).style.display = "block";

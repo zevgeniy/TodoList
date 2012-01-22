@@ -1,13 +1,17 @@
-		<% for p in current_user.projects%>
+		<% for p in current_user.projects %>
 		<div id="project<%=p.id%>">
-			<a href=""><%=p.name%></a>
+			<%= link_to p.name, "#{p.id}/openProject", :method => "post"%>
 			
-			<div id="projectSettings"> 
-			<%= link_to 'x', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete %>
-			<%= link_to_function 'edit', "showEditBox(#{p.id})" %>
-			</div>
+		
 			
+		<div id="projectSettings"> 
+		<%= link_to 'x', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete %>
+		<%= link_to_function 'edit', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")" %>
 		</div>
+		
+		</div>
+			
+		
 		<div id="formProj<%=p.id%>" style="display:none">
 		<%= form_for(:project, :url => "#{p.id}/editProject",method: :put, :style => 'display:inline') do |f| %>
 		<%= f.text_field :name %>
@@ -17,6 +21,8 @@
 		</div>
 		
 		<% end %>
+
+
 		</br>
 		<div id="newProj" style="display:none;">
 		<%= form_for(:projects, :url => '/newProject') do |f| %>

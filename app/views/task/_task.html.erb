@@ -1,0 +1,31 @@
+<% if !current_list.nil? %>
+<% for t in @current_list.tasks %>
+<div id="Task<%= t.id %>">
+	<%= t.name %>
+	
+	<div id="taskSettings">
+		<%= link_to 'x', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete %>
+		<%= link_to_function 'edit', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")" %>
+	</div>	
+</div>
+
+<div id="formTask<%=t.id%>" style="display:none">
+	<%= form_for(:task, :url => "#{t.id}/editTask", :method => :put, :style => 'display:inline') do |f| %>
+		<%= f.text_field :name %>
+		<%= f.submit "Ok" %>	
+	<% end %>
+	<%= link_to_function 'cancle', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :style => 'margin-left:10px' %>
+</div>
+<% end %>
+
+</br>
+		<div id="newTask" style="display:none;">
+		<%= form_for(:tasks, :url => '/newTask') do |f| %>
+			<%= f.label :name %> <%= f.text_field :name %>
+			<%= f.submit "Add" %>
+		<% end %>
+		<%=link_to_function "Cancel", "hide('newTask')"%>
+		</div>
+		<%=link_to_function "Add task", "show('newTask')"%>
+
+<% end %>
