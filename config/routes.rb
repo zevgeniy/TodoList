@@ -22,6 +22,11 @@ TodoList::Application.routes.draw do
   delete ":id/delTask", :to => "task#delete"
   put ":id/editTask", :to => "task#update"
   
+  get ":id/completed", :to => "task#completed"
+  
+  get ":id/addUser", :to => "task#findUser", :as => "find_user"
+  post ":id/addUser/:finded", :to =>"task#addUser"
+  
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

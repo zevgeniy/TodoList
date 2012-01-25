@@ -21,5 +21,9 @@ class UserController < ApplicationController
 
   def update
   end
+  
+  def find
+  
+  end
 
 end

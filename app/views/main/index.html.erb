@@ -1,30 +1,21 @@
-<div id="content">
 	<% if !signed_in? %>
     	<%= render template: 'session/_session' %>
 	<% else %>
+	<p id="notice"><%= notice %></p>
 	<div id="userData">
 	<span id="userLogin"> <%= current_user.login %> </span><%= link_to 'Sign out', signout_path, :method => :post %>
 	</div>
 	<div id="ProjectsAndList">
-	<div id="projects"> 
-		<h2>Projects:</h2>		
-		<p id="notice"><%= notice %></p>
+	<div id="projects">				
 		<%= render template: 'project/_project' %>		
 	</div>
 	
-	<div id="tasksList">
-	<h2>Task's list:</h2>
+	<div id="tasksList" >
 		<%= render template: 'list/_list' %>		
 	</div>
 	</div>
 	
 	<div id="tasks">
-		<h3>Tasks:</h3>
 		<%= render template: 'task/_task' %>		
 	</div>
 	<% end %>
-</div>
-
-<div id="footer">
-<span>made by Evgeniy aka Fantaz1 Zabolotniy</span>
-</div>

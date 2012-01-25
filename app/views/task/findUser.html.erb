@@ -1,0 +1,15 @@
+<div id="searchUser" class=lifted >
+<%= notice %>
+<h3> Find user </h3>
+<%= form_for(:tasks, :method => :get ) do |f| %>
+<%= f.text_field :name, :placeholder => "Input user's login or email", :required=>true %>
+<%= f.submit "Find" %>
+<% end %>
+</div>
+
+<% for u in @users %>
+<div id="findedUser"> 
+<%= u.login %> 
+<%= link_to "+", find_user_path + "/#{u.id}", :method=>:post %>
+</div>
+<% end %>

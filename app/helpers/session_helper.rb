@@ -6,6 +6,10 @@ module SessionHelper
 
 	def sign_out
 		session[:current_user_id] = nil
+		session[:current_project_id] = nil
+		session[:current_list_id] = nil
+		@current_project = nil
+		@current_list = nil
 		@current_user = nil
 	end
 

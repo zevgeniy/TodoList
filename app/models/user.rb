@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
 has_many :projects
+has_and_belongs_to_many :tasks
 
 validates :login, 	:presence => true,
 					:length => {:minimum => 3, :maximum => 12},

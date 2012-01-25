@@ -34,3 +34,4 @@ function hideEditBox(id)
 	document.getElementById("formProj" + id).style.display = "none";
 	document.getElementById("project" + id).style.display = "block";
 }
+

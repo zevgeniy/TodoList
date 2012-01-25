@@ -6,18 +6,154 @@
  *= require_tree . 
 */
 
+body{
+margin:0 30px;
+}
+
+
+#desc{
+color:gray;
+font-size:12px;
+
+}
+
+.leftPartSet{
+float:left;
+width:97%;
+}
+
+.rightpartSet{
+float:right;
+width:2%;
+}
+
+
 #notice{
 color:green;
 
 }
 
-#header{
-
+header{
 color:green;
 text-align:center;
-
 }
 
-#header h1{
-text-shadow: 0px 2px 3px #171717;
+header h1{
+font: auto Helvetica, Arial, Sans-Serif;
+letter-spacing: 4px;
+margin: 60px 0 0 100px;
+text-shadow: 0px 2px 3px #555;
 }
+
+
+.lifted p {
+        font-size:16px;
+        font-weight:bold;
+}
+ 
+.lifted {
+        position:relative;
+        width:40%;
+        padding:1em;
+        margin:2em 10px 4em;
+        background:#fff;
+        border-radius:4px;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        -moz-border-radius:4px;
+ 
+}
+ 
+.lifted:before,
+.lifted:after {
+        content:"";
+        position:absolute;
+        z-index:-2;
+        bottom:15px;
+        left:10px;
+        width:50%;
+        height:20%;
+        max-width:300px;
+    -webkit-box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+       -moz-box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+            box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+    -webkit-transform:rotate(-3deg);
+       -moz-transform:rotate(-3deg);
+        -ms-transform:rotate(-3deg);
+         -o-transform:rotate(-3deg);
+            transform:rotate(-3deg);
+}
+ 
+.lifted:after {
+    right:10px;
+    left:auto;
+    -webkit-transform:rotate(3deg);
+       -moz-transform:rotate(3deg);
+        -ms-transform:rotate(3deg);
+         -o-transform:rotate(3deg);
+            transform:rotate(3deg);
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.curved-hz-1 {
+    position:relative;
+    width:40%;
+    padding:1em;
+    margin:2em 10px 4em;
+    background:#fff;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+ 
+.curved-hz-1:before,
+.curved-hz-1:after {
+    content:"";
+    position:absolute;
+    z-index:-2;
+}
+ 
+.curved-hz-1:before {
+    top:50%;
+    bottom:0px;
+    left:10px;
+    right:10px;
+    -webkit-box-shadow:0 0 15px rgba(0,0,0,0.6);
+       -moz-box-shadow:0 0 15px rgba(0,0,0,0.6);
+            box-shadow:0 0 15px rgba(0,0,0,0.6);
+    -moz-border-radius:100px / 10px;
+         border-radius:100px / 10px;
+}
+ 
+.curved-hz-1 p {
+    font-size:16px;
+    font-weight:bold;
+} 
+
+.headerDiv {
+	font: auto Tahoma, Helvetica, Arial, Sans-Serif;
+	text-align: center;
+	color: #222;
+	text-shadow: 1px 1px 2px #555;
+	letter-spacing: 4px;
+	font-weight: bold;
+    background-color:#9827d3;
+    width:150px;
+    display:inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+    position:relative;
+    margin-top:0;
+    padding-bottom:10px;
+    padding-top:10px;
+    background-image: linear-gradient(bottom, rgb(168,48,232) 100%, rgb(141,32,196) 0%);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: inset 0px 1px 0px #ca73f8, 0px 5px 0px 0px #6a1099, 0px 10px 5px #999;
+}   
+
+//----------BUTTON-----------------

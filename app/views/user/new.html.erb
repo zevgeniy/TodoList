@@ -1,4 +1,4 @@
-<div id="signupScreen">
+<div id="signupScreen" class=lifted>
 <%= form_for(:user) do |f|%>
 <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -14,22 +14,22 @@
   
 <div class="field">
 <%= f.label :login %></br>
-<%= f.text_field :login %>
+<%= f.text_field :login, :placeholder=>"login", :required => true %>
 </div>
 
 <div class="field">
 <%= f.label :password %></br>
-<%= f.password_field :password %>
+<%= f.password_field :password, :placeholder=>"•••", :required => true %>
 </div>
 
 <div class="field">
 <%= f.label :password_confirmation %></br>
-<%= f.password_field :password_confirmation %>
+<%= f.password_field :password_confirmation, :placeholder=>"•••", :required => true %>
 </div>
 
 <div class="field">
 <%= f.label :email %></br>
-<%= f.text_field :email %>
+<%= f.email_field :email, :placeholder=>"Goga@gmail.com", :required => true %>
 </div>
 </br>
 <div class="action">
