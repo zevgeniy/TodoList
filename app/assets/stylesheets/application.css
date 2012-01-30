@@ -5,11 +5,20 @@
  *= require_self
  *= require_tree . 
 */
+.showgrid {background:url("grid.png");}
 
-body{
-margin:0 30px;
+#signinDiv label, #signupScreen label{
+font-weight:normal;
 }
 
+html,body{
+margin:0;
+padding:0;
+}
+
+a{
+content:none;
+}
 
 #desc{
 color:gray;
@@ -17,34 +26,11 @@ font-size:12px;
 
 }
 
-.leftPartSet{
-float:left;
-width:97%;
-}
-
-.rightpartSet{
-float:right;
-width:2%;
-}
-
 
 #notice{
 color:green;
 
 }
-
-header{
-color:green;
-text-align:center;
-}
-
-header h1{
-font: auto Helvetica, Arial, Sans-Serif;
-letter-spacing: 4px;
-margin: 60px 0 0 100px;
-text-shadow: 0px 2px 3px #555;
-}
-
 
 .lifted p {
         font-size:16px;
@@ -132,28 +118,32 @@ text-shadow: 0px 2px 3px #555;
     font-weight:bold;
 } 
 
-.headerDiv {
-	font: auto Tahoma, Helvetica, Arial, Sans-Serif;
+#headerDiv {
 	text-align: center;
-	color: #222;
 	text-shadow: 1px 1px 2px #555;
-	letter-spacing: 4px;
 	font-weight: bold;
-    background-color:#9827d3;
-    width:150px;
-    display:inline-block;
+	vertical-align:middle;
+	font: auto Tahoma, Helvetica, Arial, Sans-Serif;
     font-family: 'Open Sans', sans-serif;
     font-size:20px;
+
+	letter-spacing: 4px;
+	
+    background-color:#9827d3;
+    width:150px;
+
     text-decoration:none;
     color:#fff;
     position:relative;
-    margin-top:0;
+    margin:0 40%;
     padding-bottom:10px;
     padding-top:10px;
     background-image: linear-gradient(bottom, rgb(168,48,232) 100%, rgb(141,32,196) 0%);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     box-shadow: inset 0px 1px 0px #ca73f8, 0px 5px 0px 0px #6a1099, 0px 10px 5px #999;
-}   
+}
 
-//----------BUTTON-----------------
+#headerDiv p{
+margin:10px;
+}

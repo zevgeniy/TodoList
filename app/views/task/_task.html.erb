@@ -2,19 +2,20 @@
 	<h3>Tasks:</h3>
 	<% for t in @current_list.tasks.where("state <> ?", true).order(:priority) %>
 		<div id="Task<%= t.id %>">
-			<div class="leftPartSet">
+			<div class="column span-11">
 			<%= check_box " ", " ",:onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post %>	
 			<%= t.name %>
 			<span id="desc"><%= t.description %> </span>
 			</div>
 			
-			<div class="rightPartSet" id="taskSettings">				
-				<%= link_to_function '↓', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")" %>
+			<div class="column span-1 last" id="taskSettings">				
+				<%= link_to_function '↓', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")", :id=>"array"%>
 			</div>	
 		</div>
 
 		<div id="formTask<%=t.id%>" style="display:none">
-			<div class="leftPartSet">
+			<div class="column span-11">
+			<div class="notice">
 			<%= form_for(:task, :url => "#{t.id}/editTask", :method => :put, :style => 'display:inline') do |f| %>
 				<table>
 				<tr><td></td><td style="text-align:right;"><%=f.label :priority%> <%= f.select :priority, [1,2,3], :selected => t.priority.nil? ? 2 : t.priority %></td>
@@ -41,20 +42,20 @@
 				<%= f.submit "Update"%>
 				<%= link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete %>
 				</td>
-				<td> <%= link_to "Add user to task", "#{t.id}/findUser" %> </td>
+				<td> <%= link_to "Add user", "#{t.id}/findUser" %> </td>
 				</tr>
 				</table>
 					
 			<% end %>
-			
+			</div>
 			</div>
 			
-			<div class="rightPartSet">
-			<%= link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :style=>"float:right;", :method => :post %>
+			<div class="column span-1">
+			<%= link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :method => :post, :id=>"array" %>
 			</div>
 		</div>
 	<% end %>
-	
+	<hr>
 	<div id="newTask" style="display:none;">
 		<%= form_for(:tasks, :url => '/newTask') do |f| %>
 			<%= f.text_field :name, :placeholder=>"What do you want to do?", :required => true %>
@@ -63,8 +64,8 @@
 		<%=link_to_function "Cancel", "hide('newTask')"%>
 	</div>
 	
-	<%=link_to_function "Add task", "show('newTask')"%>
-	
+	<%=link_to_function "Add task", "show('newTask')", :class=>"button"%>
+	<hr>
 	<div id="completedTasks">
 		<h3>Completed tasks</h3>
 

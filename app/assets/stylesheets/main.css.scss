@@ -6,30 +6,20 @@
 min-height:500px;
 }
 
-#ProjectsAndList{
-float: left;
-width: 30%;
-margin-right:100px;
-}
-
-#projects{
-border-bottom: 1px solid black;
-}
-
 #tasksList{
+margin-top:100px;
 }
-
-#tasks{
-width: 40%;
-position:relative; 
-display:inline-block;
-margin: 0 100px;
-}
-
-
-
 
 #userData{
-text-align:right;
+margin:10px 0 50px 0;
+}
 
+#array{
+text-decoration:none;
+}
+
+#footer{
+padding:20px;
+text-align:right;
+font-weight:bold;
 }

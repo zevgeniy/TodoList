@@ -24,8 +24,8 @@ TodoList::Application.routes.draw do
   
   get ":id/completed", :to => "task#completed"
   
-  get ":id/addUser", :to => "task#findUser", :as => "find_user"
-  post ":id/addUser/:finded", :to =>"task#addUser"
+  get ":id/findUser", :to => "task#findUser", :as => "find_user"
+  post ":id/findUser/:finded", :to =>"task#addUser"
   
   root :to => 'main#index'
 

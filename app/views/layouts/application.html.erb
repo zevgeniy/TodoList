@@ -2,25 +2,31 @@
 <html>
 <head>
   <title>TodoList</title>
+  
+  <%= stylesheet_link_tag "blueprint/screen.css" %>
+  <%= stylesheet_link_tag "blueprint/print.css" %> 
+<!--[if IE]> <%= stylesheet_link_tag "vendor/assets/blueprint/ie.css" %><![endif]-->
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="container" id=main>
 
-<header>
-<div class=headerDiv>
+<div id=headerDiv class="column span-24 last">
+
 <p>Todo list</p>
-</div>
-</header>
 
+</div>
+</br>
 <div id="content">
 <%= yield %>
 </div>
-
-<footer>
+<hr class="clear"/>
+<div class="span-24 prepend-1 column last" id="footer">
 <span>made by Evgeniy aka Fantaz1 Zabolotniy</span>
-</footer>
+</div>
 
+</div>
 </body>
 </html>

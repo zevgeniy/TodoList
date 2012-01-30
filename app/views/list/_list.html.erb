@@ -1,35 +1,48 @@
 <% if !current_project.nil? %>
-<h2>Task's list:</h2>
-<% for l in @current_project.lists %>
+<h3>Task's list:</h3>
+<hr class="clear"/>
+
+<% for l in current_project.lists %>
+	<% className = " "%>
+	<% if !current_list.nil? && current_list.id == l.id %>
+			<% className="success"%>
+		<% else %>
+			<%className="info"%>
+		<% end %>	
+		
 <div id="ListTask<%= l.id %>">
-	<div class="leftPartSet">
+	<div class="column span-7">
+	<div  class=<%=className%>>
 	<%= link_to l.name, "#{l.id}/openTaskList", :method => "post"%>
 	<span id="desc"><%= l.description %></span>
 	</div>
-	<div class="rightPartSet" id="listSettings">		
-		<%= link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")" %>
+	</div>
+	<div class="column span-1" id="projectSettings">		
+		<%= link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :id=>"array" %>
 	</div>	
 </div>
 
 <div id="formList<%=l.id%>" style="display:none">
-	<div class="leftPartSet">
+	<div class="column span-7" style="display:block;">
+	<div class="notice">
 	<%= form_for(:list, :url => "#{l.id}/editTaskList", :method => :put, :style => 'display:inline') do |f| %>
 		<%= f.text_field :name, :value => l.name, :placeholder => "Task's list name", :required => true %>
 		<%= f.text_field :description, :value => l.description, :placeholder => "Description" %>
 		</br>
-		<%= f.submit "Update"%> 
-		<%= link_to 'Delete', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete %>
-					
+		<%= f.submit "Update"%>	
+		<%= link_to 'Delete', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete %>				
 	<% end %>	
+	</div>	
 	</div>
 	
 	
-	<div class="rightPartSet">
-	<%= link_to_function '↑', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :style => 'float:right;' %>
+	<div class="column span-1">
+	<%= link_to_function '↑', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :id=>"array" %>
 	</div>
 </div>
 <% end %>
-
+		<hr>
+		
 		<div id="newList" style="display:none;">
 		<%= form_for(:lists, :url => '/newTaskList') do |f| %>
 			<%= f.text_field :name, :placeholder => "Task's list name", :required => true %>
@@ -38,6 +51,7 @@
 		
 		<%=link_to_function "Cancel", "hide('newList')"%>
 		</div>
-		<%=link_to_function "Add task list", "show('newList')"%>
-
+		<div id="addButton">
+		<%=link_to_function "Add task list", "show('newList')", :class=>"button"%>
+		</div>
 <% end %>

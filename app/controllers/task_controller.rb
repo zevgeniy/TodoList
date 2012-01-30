@@ -49,7 +49,7 @@ class TaskController < ApplicationController
   def addUser
   	u = User.find_by_id(params[:finded])
   	if u
-  		Task.find_by_id(params[:id]) << u
+  		Task.find_by_id(params[:id]).users << u
   	end
   	redirect_to find_user_path
   end

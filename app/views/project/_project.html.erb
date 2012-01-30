@@ -1,34 +1,48 @@
-<h2>Projects:</h2>		
+<h3>Projects:</h3>	
+<hr class="clear"/>
+	
 	<% for p in current_user.projects %>
-	<div id="project<%=p.id%>">
-		<%= link_to p.name, "#{p.id}/openProject", :method => "post"%>
-			
-		<div id="projectSettings"> 		
-		<%= link_to_function '↓', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")" %>
-		</div>
+		<% className = " "%>
+		<% if !current_project.nil? && current_project.id == p.id %>
+			<% className="success"%>
+		<% else %>
+			<% className="info" %>
+		<% end %>
+		
+	<div id="project<%=p.id%>"  >
+	<div class="span-7">
+		<div class=<%=className%>>
+		<%= link_to p.name, "#{p.id}/openProject", :method => "post" %>
+		</div>		
+	</div>
+		<%= link_to_function '↓', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"span-1 last", :id=>"array"%>
 		
 	</div>
 			
 		
 	<div id="formProj<%=p.id%>" style="display:none">
-		<div class="leftPartSet">
+		<div class="column span-7">
+		<div class="notice">
 		<%= form_for(:project, :url => "#{p.id}/editProject",method: :put, :style => 'display:inline') do |f| %>
 			<%= f.text_field :name, :value => p.name, :placeholder=>"Project's name" %>				
 			</br>
-			<%= f.submit "Update", :style => "margin:0 45px;" %>		
-		<% end %>		
-		<%= link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete %>
+			<%= f.submit "Update", :style => "margin:0 45px;" %>
+			<%= link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete %>		
+		<% end %>
+		</div>
 		</div>
 			
-		<div class="rightPartSet">
-		<%= link_to_function '↑', "ShowAndHide( \"project#{p.id}\", \"formProj#{p.id}\")", :style => 'float:right;' %>
+		<div class="column span-1" style=""
+		<%= link_to_function '↑', "ShowAndHide( \"project#{p.id}\", \"formProj#{p.id}\")", :id=>"array" %>
+		</div>
+		<div>
+		<%= link_to_function 'Share', "ShowAndHide(\"#{}\",\"#{}\")" %>
 		</div>		
 	</div>
 		
 	<% end %>
 
-
-	</br>
+	<hr class="clear"/>
 	<div id="newProj" style="display:none;">
 	<%= form_for(:projects, :url => '/newProject') do |f| %>
 		<%= f.text_field :name, :placeholder => "Project name", :required => true %>
@@ -36,4 +50,6 @@
 	<% end %>
 	<%=link_to_function "Cancel", "hide('newProj')"%>
 	</div>
-	<%=link_to_function "Add project", "show('newProj')"%>
+	<div id="addButton">
+	<%=link_to_function "Add project", "show('newProj')", :class=>"button"%>
+	</div>

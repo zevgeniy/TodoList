@@ -2,20 +2,20 @@
     	<%= render template: 'session/_session' %>
 	<% else %>
 	<p id="notice"><%= notice %></p>
-	<div id="userData">
+	<div class="column prepend-20 column span-4" id="userData">
 	<span id="userLogin"> <%= current_user.login %> </span><%= link_to 'Sign out', signout_path, :method => :post %>
 	</div>
-	<div id="ProjectsAndList">
+	<div id="ProjectsAndList" class="column span-9 colborder">
 	<div id="projects">				
 		<%= render template: 'project/_project' %>		
 	</div>
 	
-	<div id="tasksList" >
+	<div id="tasksList">
 		<%= render template: 'list/_list' %>		
 	</div>
 	</div>
 	
-	<div id="tasks">
+	<div id="tasks" class="prepend-1 column span-13 last">
 		<%= render template: 'task/_task' %>		
 	</div>
 	<% end %>
