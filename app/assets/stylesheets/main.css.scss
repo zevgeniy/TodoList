@@ -2,17 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#menu{
+margin:20px 0 0 0;
+border-bottom: 1px solid #CCC;
+}
 #content{
-min-height:500px;
+min-height:700px;
 }
 
 #tasksList{
 margin-top:100px;
 }
 
-#userData{
-margin:10px 0 50px 0;
-}
 
 #array{
 text-decoration:none;
@@ -23,3 +24,30 @@ padding:20px;
 text-align:right;
 font-weight:bold;
 }
+
+.tabs li{
+border-top-left-right:1px solid #C6D880;
+}
+.tabs li a.selected { 
+  background:#D5EDF8;
+  
+  color:#fff;
+  text-shadow: 0 0 2px black;
+}
+
+.tabs li a { 
+  background:#567bb3;
+  border-top-left-right:1px solid #16325c;
+  color:#fff;
+}
+
+.tabs li a.selected:focus, .tabs li a.selected:hover { 
+  color:#fff;
+  outline:none;
+}
+
+#completeness .tabs li{   
+  border-bottom-left-right:1px solid #C6D880;
+  border-top:none;
+}
+

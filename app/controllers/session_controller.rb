@@ -1,5 +1,9 @@
 class SessionController < ApplicationController
   def signin
+
+  end
+
+  def new
   	user = User.authenticate(params[:sessions][:login], params[:sessions][:password])
   	if !user.nil?
   		sign_in user		

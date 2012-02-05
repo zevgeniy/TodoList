@@ -8,6 +8,7 @@ module SessionHelper
 		session[:current_user_id] = nil
 		session[:current_project_id] = nil
 		session[:current_list_id] = nil
+		session[:current_tasks_state] = nil
 		@current_project = nil
 		@current_list = nil
 		@current_user = nil
@@ -29,6 +30,7 @@ module SessionHelper
 		!current_user.nil?
 	end
 
+
 	private
 	def current_user=(user)
 		@current_user = user
@@ -41,4 +43,6 @@ module SessionHelper
 	def current_list=(list)
 		@current_list = list
 	end
+	
+	
 end

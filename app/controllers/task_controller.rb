@@ -18,14 +18,14 @@ class TaskController < ApplicationController
     if !t.nil?
    	 t.destroy
     end
-    redirect_to root_path
+    redirect_to :back
   end
 
   def update
   	t = Task.find_by_id(params[:id])
   	if !t.nil?
   		t.update_attributes(params[:task])
-  		redirect_to root_path
+  		redirect_to :back
   	end
   end
   
@@ -34,7 +34,7 @@ class TaskController < ApplicationController
   	if !t.nil?
   		t.state = !t.state
   		t.update_attributes(params[:task])  		
-  		redirect_to root_path
+  		redirect_to :back
   	end
   end
   
@@ -43,13 +43,22 @@ class TaskController < ApplicationController
   		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
   	else
   		@users = User.all
-  	end  	
+  	end 
+  	@task =  Task.find_by_id(params[:id])
   end
   
   def addUser
   	u = User.find_by_id(params[:finded])
   	if u
   		Task.find_by_id(params[:id]).users << u
+  	end
+  	redirect_to find_user_path
+  end
+  
+  def delUser
+  	u = User.find_by_id(params[:finded])
+  	if u
+  		Task.find_by_id(params[:id]).users.destroy u
   	end
   	redirect_to find_user_path
   end

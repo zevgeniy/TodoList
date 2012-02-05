@@ -2,8 +2,10 @@ TodoList::Application.routes.draw do
 
   get "/signup", :to => 'user#new', :as => 'signup'
   post "/signup", :to => 'user#create'
+
+  get "/signin", :to => 'session#signin', :as => 'signin';
   
-  post "/signin", :to => 'session#signin', :as => 'signin'
+  post "/session/new", :to => 'session#new', :as => 'session_new'
   post "/signout", :to => 'session#signout', :as => 'signout'
 
   post "/newProject", :to =>  'project#create'
@@ -25,8 +27,12 @@ TodoList::Application.routes.draw do
   get ":id/completed", :to => "task#completed"
   
   get ":id/findUser", :to => "task#findUser", :as => "find_user"
-  post ":id/findUser/:finded", :to =>"task#addUser"
+  post ":id/findUser/add/:finded", :to =>"task#addUser", :as => "addUserToTask"
+  post ":id/findUser/del/:finded", :to =>"task#delUser", :as => "delUserFromTask"
   
+  get "/completed", :to => "main#completed", :as => "completed";
+  get "/not_completed", :to => "main#not_completed", :as => "not_completed";
+  get "/foreign", :to => "main#foreign", :as => "foreign";
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

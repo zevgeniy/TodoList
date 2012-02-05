@@ -1,6 +1,4 @@
 class UserController < ApplicationController
-  def show
-  end
 
   def new
   	@user = User.new
@@ -14,16 +12,6 @@ class UserController < ApplicationController
   		redirect_to signup_path	
   	end	
   	
-  end
-
-  def edit
-  end
-
-  def update
-  end
-  
-  def find
-  
   end
 
 end

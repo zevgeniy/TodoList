@@ -1,0 +1,9 @@
+<div id="completedTasks">
+	<h3 class="alt">Completed tasks</h3>
+	<% for t in @tasks.where("state = ?", true) %>
+		<div id="completedTask">
+			<%= check_box " ", " ",:checked => true, :onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post %>
+			<%= t.name %>
+		</div>
+	<% end %>
+</div>

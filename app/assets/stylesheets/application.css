@@ -5,8 +5,27 @@
  *= require_self
  *= require_tree . 
 */
+
+.tabs{
+margin:0;
+border:none;
+}
+
+
+.cAlign{
+margin:0 auto;
+text-align:center;
+}
 .showgrid {background:url("grid.png");}
 
+.success, .info{
+padding:5px;
+}
+
+.success:hover, .info:hover{
+-webkit-box-shadow:0 0 5px rgba(0,0,0,0.6);
+
+}
 #signinDiv label, #signupScreen label{
 font-weight:normal;
 }
@@ -46,7 +65,7 @@ color:green;
         border-radius:4px;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
        -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(36, 74, 171, 0.5), 0 0 40px rgba(35, 173, 173, 0.1) inset;
         -moz-border-radius:4px;
  
 }
@@ -124,12 +143,12 @@ color:green;
 	font-weight: bold;
 	vertical-align:middle;
 	font: auto Tahoma, Helvetica, Arial, Sans-Serif;
-    font-family: 'Open Sans', sans-serif;
+    	font-family: 'Open Sans', sans-serif;
     font-size:20px;
 
 	letter-spacing: 4px;
 	
-    background-color:#9827d3;
+    background-color:#567bb3;
     width:150px;
 
     text-decoration:none;
@@ -138,10 +157,23 @@ color:green;
     margin:0 40%;
     padding-bottom:10px;
     padding-top:10px;
-    background-image: linear-gradient(bottom, rgb(168,48,232) 100%, rgb(141,32,196) 0%);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    box-shadow: inset 0px 1px 0px #ca73f8, 0px 5px 0px 0px #6a1099, 0px 10px 5px #999;
+    box-shadow: inset 0px 1px 0px #52719e, 0px 5px 0px 0px #1c4480, 0px 10px 5px #999;
+	
+    background-image: linear-gradient(bottom, rgb(86,123,179) 100%, rgb(100,129,173) 61%);
+background-image: -o-linear-gradient(bottom, rgb(86,123,179) 100%, rgb(100,129,173) 61%);
+background-image: -moz-linear-gradient(bottom, rgb(86,123,179) 100%, rgb(100,129,173) 61%);
+background-image: -webkit-linear-gradient(bottom, rgb(86,123,179) 100%, rgb(100,129,173) 61%);
+background-image: -ms-linear-gradient(bottom, rgb(86,123,179) 100%, rgb(100,129,173) 61%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(1, rgb(86,123,179)),
+	color-stop(0.61, rgb(100,129,173))
+);
 }
 
 #headerDiv p{

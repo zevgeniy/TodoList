@@ -1,0 +1,20 @@
+<div id="menu" class="column span-24 last">
+	<div class="column tabs span-10">
+		<ul>
+			<li class="label">Tasks: </li>
+			<li><%= link_to "My", root_path%></li>
+			<li><%= link_to "Foreign", foreign_path%></li>
+		</ul>		
+	</div>
+	<div id="userData" class="column prepend-9 span-5">
+		<span id="userLogin"> <%= current_user.login %> </span>(<%= link_to 'Sign out', signout_path, :method => :post %>)
+	</div>
+</div>
+<div id="completeness" class="column prepend-17 span-7 last tabs" style="padding-left: 680px;">
+	<ul>
+		<li><a href="/not_completed">Not completed</a></li>
+		<li><a href="/completed", class="selected">Completed</a></li>
+	</ul>
+</div>
+
+<%= render template:"task/_tasks" %>
