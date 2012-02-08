@@ -1,0 +1,45 @@
+%h3.alt Projects:
+%hr.clear/
+- if @projects.count > 0
+  - for p in @projects
+    - className = " "
+    - if !current_project.nil? && current_project.id == p.id
+      - className="success"
+    - else
+      - className="info"
+    %div{:id => "project#{p.id}"}
+      .span-7
+        %div{:class=>className}
+          =link_to p.name, "#{p.id}/openProject", :method => "post"
+          (
+          %span{:style => "color:red"}
+            = p.lists.inject(0) {|s,n| s + n.tasks.where("state <> ?", true).count}
+          )
+      = link_to_function '↓', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"span-1 last", :id=>"array"
+    %div{:id => "formProj#{p.id}", :style => "display:none"}
+      .column.span-7
+        .notice
+          = form_for(:project, :url => "#{p.id}/editProject",method: :put, :style => 'display:inline') do |f|
+            = f.text_field :name, :value => p.name, :placeholder=>"Project's name"
+            = f.submit "Update", :style => "margin:0 45px;"
+            -if @foreign.nil?
+              = link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete
+      .column.span-1
+        =link_to_function '↑', "ShowAndHide( \"project#{p.id}\", \"formProj#{p.id}\")", :id=>"array"
+        -if @foreign.nil?
+          =link_to 'Share', "#{p.id}/share_project"
+-elsif @foreign.nil?
+  %p.alt{:onclick=>"show('newProj')", :style=>"font-size:14px;"}
+    You don't have any projects!
+-else
+  %p.alt{:style=>"font-size:14px;"}
+    You don't have any projects
+%hr.clear/
+-if @foreign.nil?
+  #newProj{:style => "display:none;"}
+    = form_for(:projects, :url => '/newProject') do |f|
+      = f.text_field :name, :placeholder => "Project name", :required => true, :value=>""
+      = f.submit "Add"
+    = link_to_function "Cancel", "hide('newProj')"
+  #addButton
+    = link_to_function "Add project", "show('newProj')", :class=>"button"

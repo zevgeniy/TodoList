@@ -1,0 +1,38 @@
+- if !current_project.nil?
+  %h3.alt Task's list:
+  %hr.clear/
+  - if current_project.lists.count > 0
+    - for l in current_project.lists
+      - className = " "
+      - if !current_list.nil? && current_list.id == l.id
+        - className="success"
+      - else
+        - className="info"
+      %div{:id => "ListTask#{l.id}"}
+        .column.span-7
+          %div{:class=>className}
+            =link_to l.name, "#{l.id}/openTaskList", :method => "post"
+            %span#desc= l.description
+        #projectSettings.column.span-1
+        = link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :id=>"array"
+      %div{:id => "formList#{l.id}", :style => "display:none"}
+        .column.span-7{:style => "display:block;"}
+          .notice
+            = form_for(:list, :url => "#{l.id}/editTaskList", :method => :put, :style => 'display:inline') do |f|
+              = f.text_field :name, :value => l.name, :placeholder => "Task's list name", :required => true
+              = f.text_field :description, :value => l.description, :placeholder => "Description"
+              = f.submit "Update"
+              = link_to 'Delete', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete
+        .column.span-1
+          = link_to_function '↑', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :id=>"array"
+  - else
+    %p.alt{:onclick=>"show('newList')", :style=>"font-size:14px;"}
+      You don't have any task's lists!
+  %hr
+    #newList{:style => "display:none;"}
+      = form_for(:lists, :url => '/newTaskList') do |f|
+        = f.text_field :name, :placeholder => "Task's list name", :required => true
+        = f.submit "Add"
+      = link_to_function "Cancel", "hide('newList')"
+    #addButton
+      = link_to_function "Add task list", "show('newList')", :class=>"button"

@@ -4,9 +4,10 @@ class ListController < ApplicationController
   	@list.project_id = current_project.id
   	respond_to do |format|
       if @list.save
-        format.html { redirect_to root_path }
+        session[:current_list_id] = @list.id
+        format.html { redirect_to :back }
       else
-        format.html { redirect_to root_path }
+        format.html { redirect_to :back }
       end
   	end	
   end
@@ -16,19 +17,19 @@ class ListController < ApplicationController
     if !l.nil?
    	 l.destroy
     end
-    redirect_to root_path
+    redirect_to :back
   end
 
   def update
   l = List.find_by_id(params[:id])
   	if !l.nil?
   		l.update_attributes(params[:list])
-  		redirect_to root_path
+  		redirect_to :back
   	end
   end
 
   def open
    	session[:current_list_id] = params[:id]
-  	redirect_to root_path
+  	redirect_to :back
   end
 end

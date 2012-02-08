@@ -6,9 +6,9 @@ class TaskController < ApplicationController
   	@task.priority = 2
   	respond_to do |format|
       if @task.save
-        format.html { redirect_to root_path }
+        format.html { redirect_to :back }
       else
-        format.html { redirect_to root_path }
+        format.html { redirect_to :back }
       end
   	end	
   end
@@ -38,21 +38,24 @@ class TaskController < ApplicationController
   	end
   end
   
-  def findUser
+  def share_task
   	if params[:tasks]
   		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
   	else
   		@users = User.all
   	end 
-  	@task =  Task.find_by_id(params[:id])
+  	@shared =  Task.find_by_id(params[:id])
+	@path = share_task_path
   end
   
   def addUser
   	u = User.find_by_id(params[:finded])
   	if u
-  		Task.find_by_id(params[:id]).users << u
+  	  t = Task.find_by_id(params[:id])
+  		t.users << u
+  		ShareMailer.shareTask(u,t,current_user).deliver
   	end
-  	redirect_to find_user_path
+  	redirect_to share_task_path
   end
   
   def delUser
@@ -60,7 +63,12 @@ class TaskController < ApplicationController
   	if u
   		Task.find_by_id(params[:id]).users.destroy u
   	end
-  	redirect_to find_user_path
+  	redirect_to share_task_path
+  end
+  
+  def delete_completed
+    Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State = 't'").each{|n| n.destroy}
+    redirect_to :back
   end
   
 end

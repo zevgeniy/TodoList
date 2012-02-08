@@ -26,13 +26,19 @@ TodoList::Application.routes.draw do
   
   get ":id/completed", :to => "task#completed"
   
-  get ":id/findUser", :to => "task#findUser", :as => "find_user"
-  post ":id/findUser/add/:finded", :to =>"task#addUser", :as => "addUserToTask"
-  post ":id/findUser/del/:finded", :to =>"task#delUser", :as => "delUserFromTask"
+  get ":id/share_task", :to => "task#share_task", :as => "share_task"
+  post ":id/share_task/add/:finded", :to =>"task#addUser", :as => "addUserToTask"
+  post ":id/share_task/del/:finded", :to =>"task#delUser", :as => "delUserFromTask"
+
+  get ":id/share_project", :to => "project#share_project", :as => "share_project"
+  post ":id/share_project/add/:finded", :to =>"project#addUser", :as => "addUserToProject"
+  post ":id/share_project/del/:finded", :to =>"project#delUser", :as => "delUserFromProject"
   
-  get "/completed", :to => "main#completed", :as => "completed";
-  get "/not_completed", :to => "main#not_completed", :as => "not_completed";
-  get "/foreign", :to => "main#foreign", :as => "foreign";
+  get "/completed", :to => "main#completed", :as => "completed"
+  get "/not_completed", :to => "main#not_completed", :as => "not_completed"
+  get "/foreign", :to => "main#foreign", :as => "foreign"
+  
+  delete "/deleteCompletedTasks", :to=>"task#delete_completed"
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

@@ -1,0 +1,24 @@
+.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
+  %ul
+    %li
+      %a{:href => "/not_completed"} Not completed
+    %li
+      %a{:href => "/completed"} Completed
+#ProjectsAndList.column.span-9.colborder
+  #projects
+    = render template: 'project/_project'
+  #tasksList
+    = render template: 'list/_list'
+#tasks.prepend-1.column.span-13.last
+  -if !current_list.nil?
+    %h3.alt Tasks:
+    = render template: 'task/_task'
+    %hr
+    #newTask{:style => "display:none;"}
+      = form_for(:tasks, :url => '/newTask') do |f|
+        = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
+        = f.submit "Add"
+      = link_to_function "Cancel", "hide('newTask')"
+    = link_to_function "Add task", "show('newTask')", :class=>"button"
+    %hr
+    = render template: 'task/_task_foreign'

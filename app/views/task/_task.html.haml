@@ -1,0 +1,38 @@
+- for t in @tasks.where("state <> ?", true).order(:priority)
+  %div{:id => "Task#{t.id}"}
+    .column.span-11
+      = check_box " ", " ",:onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post
+      = t.name
+      %span#desc
+        = t.description
+    #taskSettings.column.span-1.last
+      = link_to_function '↓', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")", :id=>"array"
+  %div{:id => "formTask#{t.id}", :style => "display:none"}
+    .column.span-11
+      .notice
+        = form_for(:task, :url => "#{t.id}/editTask", :method => :put, :style => 'display:inline') do |f|
+          %table
+            %tr
+              %td
+              %td{:style => "text-align:right;"}
+                = f.label :priority
+                = f.select :priority, [1,2,3], :selected => t.priority.nil? ? 2 : t.priority
+              %td{:rowspan => "3", :style => "vertical-align:top;"}
+                Other users:
+                - for u in t.users
+                  = u.login
+            %tr
+              %td= f.label :name
+              %td= f.text_field :name, :value => t.name
+            %tr
+              %td= f.label :description
+              %td= f.text_field :description, :value => t.description
+            %tr
+              %td
+              %td
+                = f.submit "Update"
+                = link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete
+              %td
+                = link_to "Add user", "#{t.id}/share_task"
+    .column.span-1
+      = link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :method => :post, :id=>"array"

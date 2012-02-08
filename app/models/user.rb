@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
-has_many :projects
+has_many :shares
+has_many :projects, :through => :shares
+
 has_and_belongs_to_many :tasks
 
 validates :login, 	:presence => true,
@@ -18,6 +20,14 @@ validates :password,:presence => true,
 					:format => /\A[\w]+\z/
 
 validates :password_confirmation, :presence => true
+
+def shared_projects
+  Project.where(:id => shares.select(:project_id).where(:author=>false))
+end
+
+def my_projects
+  Project.where(:id => shares.select(:project_id).where(:author=>true))
+end
 
 def self.authenticate login, password
 	user = User.where("email = '#{login}' or login = '#{login}'").first

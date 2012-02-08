@@ -1,0 +1,17 @@
+#searchUser.lifted
+  = notice
+  %h3.alt Find user
+  = form_for(:tasks, :method => :get ) do |f|
+    = f.text_field :name, :placeholder => "Input user's login or email", :required=>true
+    = f.submit "Find"
+  %hr/
+  %h3.alt Seaching result:
+  - for u in @users
+    #findedUser
+      = u.login
+      - if @shared.users.include? u
+        = link_to "–", @path + "/del/#{u.id}", :method=>:post, :id=>"array"
+      - else
+        = link_to "+", @path + "/add/#{u.id}", :method=>:post, :id=>"array"
+.cAlign
+  = link_to "back", root_path
