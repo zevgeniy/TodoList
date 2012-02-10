@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-has_many :shares
-has_many :projects, :through => :shares
+has_many :shares, :dependent => :destroy
+has_many :projects, :through => :shares, :dependent => :destroy
 
 has_and_belongs_to_many :tasks
 

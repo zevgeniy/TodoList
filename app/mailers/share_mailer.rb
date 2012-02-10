@@ -12,4 +12,12 @@ class ShareMailer < ActionMailer::Base
     @user = current_user
     mail(:to=>user.email, :subject=>"You were added to task")
   end
+  
+  def changedTaskStatus(task, user, current_user)
+    @task = task
+    @user = current_user
+    @status = task.state ? "complete" : "incomplete"
+    mail(:to=>user.email, :subject=>"Task status has changed")
+  end
+  
 end

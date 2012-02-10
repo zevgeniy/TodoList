@@ -1,8 +1,8 @@
 - for t in @tasks.where("state <> ?", true).order(:priority)
   %div{:id => "Task#{t.id}"}
-    .column.span-11
+    #taskName.column.span-11
       = check_box " ", " ",:onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post
-      = t.name
+      = t.name 
       %span#desc
         = t.description
     #taskSettings.column.span-1.last
@@ -33,6 +33,6 @@
                 = f.submit "Update"
                 = link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete
               %td
-                = link_to "Add user", "#{t.id}/share_task"
+                = link_to "Share", "#{t.id}/share_task"
     .column.span-1
       = link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :method => :post, :id=>"array"

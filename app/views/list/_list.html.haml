@@ -8,13 +8,14 @@
         - className="success"
       - else
         - className="info"
-      %div{:id => "ListTask#{l.id}"}
-        .column.span-7
+      %div.cursorPointer{:id => "ListTask#{l.id}"}
+        .column.span-7.cursorPoiter{:onclick=>"top.location.href='#{l.id}/openTaskList'"}
           %div{:class=>className}
-            =link_to l.name, "#{l.id}/openTaskList", :method => "post"
+            %span.likeA
+              =l.name
             %span#desc= l.description
         #projectSettings.column.span-1
-        = link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :id=>"array"
+          = link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :id=>"array"
       %div{:id => "formList#{l.id}", :style => "display:none"}
         .column.span-7{:style => "display:block;"}
           .notice

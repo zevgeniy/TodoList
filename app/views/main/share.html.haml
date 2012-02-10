@@ -2,10 +2,10 @@
   = notice
   %h3.alt Find user
   = form_for(:tasks, :method => :get ) do |f|
-    = f.text_field :name, :placeholder => "Input user's login or email", :required=>true
+    = f.text_field :name, :placeholder => "Enter user's login or email", :required=>true
     = f.submit "Find"
   %hr/
-  %h3.alt Seaching result:
+  %h3.alt Search results:
   - for u in @users
     #findedUser
       = u.login

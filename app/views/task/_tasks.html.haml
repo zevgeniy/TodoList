@@ -2,7 +2,7 @@
   %h3.alt Tasks:
   - for t in @tasks
     %div{:id => "Task#{t.id}"}
-      .column.span-11
+      #taskName.column.span-11
         = check_box " ", " ",:onclick =>"top.location.href= '#{t.id}/completed'", :method => :post, :checked => @complated
         = t.name
         %span#desc
@@ -40,6 +40,6 @@
                     = f.submit "Update"
                     = link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete
                   %td
-                    = link_to "Add user", "#{t.id}/findUser"
+                    = link_to "Share", "#{t.id}/findUser"
         .column.span-1
           = link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :method => :post, :id=>"array"

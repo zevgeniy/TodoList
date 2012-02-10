@@ -1,19 +1,2 @@
-#menu.column.span-24.last
-  .column.tabs.span-10
-    %ul
-      %li.label Tasks:
-      %li= link_to "My", root_path
-      %li= link_to "Foreign", foreign_path
-  #userData.column.prepend-9.span-5
-    %span#userLogin
-      = current_user.login 
-      (
-      =link_to 'Sign out', signout_path, :method => :post
-      )
-#completeness.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
-  %ul
-    %li
-      %a{:href => "/not_completed"} Not completed
-    %li
-      %a{:href=>"/completed", :class=>"selected"} Completed
+= render template:"main/_menu"
 = render template:"task/_tasks"

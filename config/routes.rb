@@ -3,22 +3,21 @@ TodoList::Application.routes.draw do
   get "/signup", :to => 'user#new', :as => 'signup'
   post "/signup", :to => 'user#create'
 
-  get "/signin", :to => 'session#signin', :as => 'signin';
-  
-  post "/session/new", :to => 'session#new', :as => 'session_new'
-  post "/signout", :to => 'session#signout', :as => 'signout'
+  get "/signin", :to => 'session#new', :as => 'signin'
+  post "/session/new", :to => 'session#create', :as => 'session_new'
+  post "/signout", :to => 'session#destroy', :as => 'signout'
 
   post "/newProject", :to =>  'project#create'
   delete ":id/delProject", :to =>  'project#delete'
   put ":id/editProject", :to =>  'project#update'
   
-  post ":id/openProject", :to => "project#open"
+  get ":id/openProject", :to => "project#open"
   
   post "/newTaskList", :to => "list#create"
   delete ":id/delTaskList", :to => "list#delete"
   put ":id/editTaskList", :to => "list#update"
   
-  post ":id/openTaskList", :to => "list#open"
+  get ":id/openTaskList", :to => "list#open"
   
   post "/newTask", :to => "task#create"
   delete ":id/delTask", :to => "task#delete"
@@ -39,6 +38,7 @@ TodoList::Application.routes.draw do
   get "/foreign", :to => "main#foreign", :as => "foreign"
   
   delete "/deleteCompletedTasks", :to=>"task#delete_completed"
+  
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

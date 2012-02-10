@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.likeA{
+font-weight:bold;
+text-decoration:underline;
+}
+
+.cursorPoiter{
+cursor:pointer;
+}
+
 #menu{
 margin:20px 0 0 0;
 border-bottom: 1px solid #CCC;
@@ -23,6 +32,12 @@ text-decoration:none;
 padding:20px;
 text-align:right;
 font-weight:bold;
+}
+
+.tabs li a{
+display:block;
+width:90px;
+text-align:center;
 }
 /*
 .tabs li{

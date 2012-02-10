@@ -8,9 +8,10 @@
     - else
       - className="info"
     %div{:id => "project#{p.id}"}
-      .span-7
+      .span-7.cursorPoiter{:onclick=>"top.location.href='#{p.id}/openProject'"}
         %div{:class=>className}
-          =link_to p.name, "#{p.id}/openProject", :method => "post"
+          %span.likeA 
+            =p.name
           (
           %span{:style => "color:red"}
             = p.lists.inject(0) {|s,n| s + n.tasks.where("state <> ?", true).count}

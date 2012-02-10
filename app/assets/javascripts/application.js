@@ -7,6 +7,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+
+$("#showCompletedTasks a").click(function(){
+$("#showCompletedTasks").hide();
+$("#completedTasks").show();
+}
+);
+
+$("#hideComplated").click(function(){
+$("#showCompletedTasks").show();
+$("#completedTasks").hide();
+}
+);
+
+})
+
 function hide(id)
 {
    document.getElementById(id).style.display = "none";
@@ -34,4 +51,6 @@ function hideEditBox(id)
 	document.getElementById("formProj" + id).style.display = "none";
 	document.getElementById("project" + id).style.display = "block";
 }
+
+
 

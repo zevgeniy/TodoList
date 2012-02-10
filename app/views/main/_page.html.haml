@@ -1,9 +1,4 @@
-.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
-  %ul
-    %li
-      %a{:href => "/not_completed"} Not completed
-    %li
-      %a{:href => "/completed"} Completed
+= render template:"main/_menu"
 #ProjectsAndList.column.span-9.colborder
   #projects
     = render template: 'project/_project'
@@ -12,13 +7,18 @@
 #tasks.prepend-1.column.span-13.last
   -if !current_list.nil?
     %h3.alt Tasks:
-    = render template: 'task/_task'
     %hr
-    #newTask{:style => "display:none;"}
-      = form_for(:tasks, :url => '/newTask') do |f|
-        = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
-        = f.submit "Add"
-      = link_to_function "Cancel", "hide('newTask')"
-    = link_to_function "Add task", "show('newTask')", :class=>"button"
+    -if @tasks.where("state <> ?", true).count > 0
+      = render template: 'task/_task'
+    -else
+      %p.alt{:onclick=>"show('newTask')", :style=>"font-size:14px;"}
+        You don't have any tasks in this task's list!
     %hr
+    .column.span-12
+      #newTask{:style => "display:none;"}
+        = form_for(:tasks, :url => '/newTask') do |f|
+          = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
+          = f.submit "Add"
+        = link_to_function "Cancel", "hide('newTask')"
+      = link_to_function "Add task", "show('newTask')", :class=>"button"
     = render template: 'task/_task_foreign'
