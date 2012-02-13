@@ -14,8 +14,20 @@
             %span.likeA
               =l.name
             %span#desc= l.description
-        #projectSettings.column.span-1
-          = link_to_function '↓', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :id=>"array"
+
+        %div.span-1.last
+          %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownList#{l.id}", :cheched=>false}
+          %span.b-dropdown
+            %a.b-dropdown-handle#dropdown-handle +
+            %label.b-dropdown-handle{:for => "DropdownList#{l.id}"}
+            
+            %span.b-dropdown-popup
+              %span.b-dropdown-popup-in
+                %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
+                  = link_to_function 'Edit', "ShowAndHide(\"formList#{l.id}\", \"ListTask#{l.id}\")", :class=>"b-dropdown-link think-link"
+                  -if @foreign.nil?
+                    = link_to 'Remove', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+              
       %div{:id => "formList#{l.id}", :style => "display:none"}
         .column.span-7{:style => "display:block;"}
           .notice
@@ -23,11 +35,10 @@
               = f.text_field :name, :value => l.name, :placeholder => "Task's list name", :required => true
               = f.text_field :description, :value => l.description, :placeholder => "Description"
               = f.submit "Update"
-              = link_to 'Delete', "#{l.id}/delTaskList", confirm: 'Are you sure?', method: :delete
         .column.span-1
           = link_to_function '↑', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :id=>"array"
   - else
-    %p.alt{:onclick=>"show('newList')", :style=>"font-size:14px;"}
+    %p#addListP.alt{:style=>"font-size:14px;"}
       You don't have any task's lists!
   %hr
     #newList{:style => "display:none;"}
@@ -36,4 +47,4 @@
         = f.submit "Add"
       = link_to_function "Cancel", "hide('newList')"
     #addButton
-      = link_to_function "Add task list", "show('newList')", :class=>"button"
+      = link_to "Add task list", "#", :class=>"button"

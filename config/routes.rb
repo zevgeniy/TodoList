@@ -4,7 +4,7 @@ TodoList::Application.routes.draw do
   post "/signup", :to => 'user#create'
 
   get "/signin", :to => 'session#new', :as => 'signin'
-  post "/session/new", :to => 'session#create', :as => 'session_new'
+  post "/signin", :to => 'session#create', :as => 'session_new'
   post "/signout", :to => 'session#destroy', :as => 'signout'
 
   post "/newProject", :to =>  'project#create'

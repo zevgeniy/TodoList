@@ -12,15 +12,38 @@ $(document).ready(function(){
 
 $("#showCompletedTasks a").click(function(){
 $("#showCompletedTasks").hide();
-$("#completedTasks").show();
+$("#completedTasks").show(500);
 }
 );
 
-$("#hideComplated").click(function(){
-$("#showCompletedTasks").show();
-$("#completedTasks").hide();
-}
-);
+$("#hideCompleted").click(function(){
+  $("#showCompletedTasks").show(500);
+  $("#completedTasks").hide();
+});
+
+
+$("#addListP").click(function(){
+  $("#newList").show();
+});
+
+$(".b-dropdown-handle").click(function(){
+  var t = $(this).parent().prev();
+
+  if(!t.prop("checked"))
+  {
+    t.click();
+    $(this).text("-");
+  }
+  else
+  {
+    $("#Paranja").click();
+    $(this).text("+");
+  }
+});
+
+$('#addButton a').click(function(){
+  $(this).parent().prev().show(500);
+});
 
 })
 

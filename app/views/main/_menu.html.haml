@@ -1,0 +1,16 @@
+#menu.column.span-24.last
+  .column.tabs.span-10
+    %ul
+      %li.label Tasks:
+      %li= link_to "My", root_path, :class=> @tabs_state[:index] ? "selected" : ""
+      %li= link_to "Foreign", foreign_path, :class=> @tabs_state[:foreign] ? "selected" : ""
+  #userData.column.prepend-9.span-4
+    %span#userLogin>
+      = current_user.login
+      (#{link_to 'Sign out', signout_path, :method => :post})
+#completeness.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
+  %ul
+    %li
+      %a{:href => "/not_completed", :class=>@tabs_state[:incompleted] ? "selected inverseTab" : "inverseTab"} Incompleted
+    %li
+      %a{:href=>"/completed", :class=> @tabs_state[:completed] ? "selected inverseTab" : "inverseTab"} Completed

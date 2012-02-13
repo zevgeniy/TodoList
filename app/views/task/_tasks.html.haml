@@ -8,8 +8,18 @@
         %span#desc
           = t.description
       - if t.list.project.author.id == current_user.id
-        #taskSettings.column.span-1.last
-          = link_to_function '↓', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")", :id=>"array"
+        %article.l-section.span-1.last
+          %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownTask#{t.id}", :cheched=>false}
+          %span.b-dropdown
+            %a.b-dropdown-handle#dropdown-handle +
+            %label.b-dropdown-handle{:for => "DropdownTask#{t.id}"}
+            
+            %span.b-dropdown-popup
+              %span.b-dropdown-popup-in
+                %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
+                  = link_to_function 'Edit', "ShowAndHide(\"formTask#{t.id}\", \"Task#{t.id}\")", :class=>"b-dropdown-link think-link"
+                  = link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+                  =link_to 'Share', "#{t.id}/share_task", :class=>"b-dropdown-link think-link"
       - else
         .column.span-1.last
           = t.list.project.author.login
@@ -38,8 +48,6 @@
                   %td
                   %td
                     = f.submit "Update"
-                    = link_to 'Delete', "#{t.id}/delTask", confirm: 'Are you sure?', method: :delete
-                  %td
-                    = link_to "Share", "#{t.id}/findUser"
-        .column.span-1
+                 
+        .column.span-1.last
           = link_to_function '↑', "ShowAndHide(\"Task#{t.id}\", \"formTask#{t.id}\")", :method => :post, :id=>"array"

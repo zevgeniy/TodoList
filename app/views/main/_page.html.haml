@@ -14,11 +14,13 @@
       %p.alt{:onclick=>"show('newTask')", :style=>"font-size:14px;"}
         You don't have any tasks in this task's list!
     %hr
-    .column.span-12
+    .column.span-13.last
       #newTask{:style => "display:none;"}
         = form_for(:tasks, :url => '/newTask') do |f|
           = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
-          = f.submit "Add"
+          = f.submit "Add", :class=>"button"
         = link_to_function "Cancel", "hide('newTask')"
-      = link_to_function "Add task", "show('newTask')", :class=>"button"
+      #addButton
+        = link_to "Add task", "#", :class=>"button"
     = render template: 'task/_task_foreign'
+%input#Paranja.b-paranja-helper{:checked => "checked", :hidden => "hidden", :name => "dropdowns", :type => "radio"}

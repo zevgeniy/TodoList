@@ -8,7 +8,7 @@
     - else
       - className="info"
     %div{:id => "project#{p.id}"}
-      .span-7.cursorPoiter{:onclick=>"top.location.href='#{p.id}/openProject'"}
+      .span-8.cursorPoiter{:onclick=>"top.location.href='#{p.id}/openProject'"}
         %div{:class=>className}
           %span.likeA 
             =p.name
@@ -16,31 +16,45 @@
           %span{:style => "color:red"}
             = p.lists.inject(0) {|s,n| s + n.tasks.where("state <> ?", true).count}
           )
-      = link_to_function '↓', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"span-1 last", :id=>"array"
+          
+      %article.l-section.span-1.last
+        %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownProj#{p.id}", :cheched=>false}
+        %span.b-dropdown
+          %a.b-dropdown-handle#dropdown-handle +
+          %label.b-dropdown-handle{:for => "DropdownProj#{p.id}"}
+          
+          %span.b-dropdown-popup
+            %span.b-dropdown-popup-in
+              %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
+                = link_to_function 'Edit', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"b-dropdown-link think-link"
+                -if @foreign.nil?
+                  = link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+                -if @foreign.nil?
+                  =link_to 'Share', "#{p.id}/share_project", :class=>"b-dropdown-link think-link"
+        
     %div{:id => "formProj#{p.id}", :style => "display:none"}
-      .column.span-7
+      .column.span-8
         .notice
           = form_for(:project, :url => "#{p.id}/editProject",method: :put, :style => 'display:inline') do |f|
             = f.text_field :name, :value => p.name, :placeholder=>"Project's name"
-            = f.submit "Update", :style => "margin:0 45px;"
-            -if @foreign.nil?
-              = link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete
-      .column.span-1
+            = f.submit "Edit"
+            
+      .column.span-1.last
         =link_to_function '↑', "ShowAndHide( \"project#{p.id}\", \"formProj#{p.id}\")", :id=>"array"
-        -if @foreign.nil?
-          =link_to 'Share', "#{p.id}/share_project"
+        
 -elsif @foreign.nil?
   %p.alt{:onclick=>"show('newProj')", :style=>"font-size:14px;"}
     You don't have any projects!
 -else
   %p.alt{:style=>"font-size:14px;"}
     You don't have any projects
-%hr.clear/
+
 -if @foreign.nil?
+  %hr.clear/
   #newProj{:style => "display:none;"}
     = form_for(:projects, :url => '/newProject') do |f|
       = f.text_field :name, :placeholder => "Project name", :required => true, :value=>""
       = f.submit "Add"
     = link_to_function "Cancel", "hide('newProj')"
   #addButton
-    = link_to_function "Add project", "show('newProj')", :class=>"button"
+    = link_to "Add project", "#", :class=>"button", :id => "AddButProj"

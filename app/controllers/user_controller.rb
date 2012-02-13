@@ -9,7 +9,7 @@ class UserController < ApplicationController
   	if @user.save
   		redirect_to root_path
   	else
-  		redirect_to signup_path	
+  		render action: "new"	
   	end	
   	
   end

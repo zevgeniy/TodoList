@@ -1,13 +1,10 @@
+- if @user.errors.any?
+  .error{:style=>"width:300px;margin:0 auto;position:fixed; top:10px; right:10px;"}
+    %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
 #signupScreen.lifted
   = form_for(:user) do |f|
-    - if @user.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(@user.errors.count, "error")
-          prohibited this user from being saved:
-        %ul
-          - @user.errors.full_messages.each do |msg|
-            %li= msg
     .field
       = f.label :login
       %br/

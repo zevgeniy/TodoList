@@ -26,6 +26,8 @@ margin-top:100px;
 
 #array{
 text-decoration:none;
+font-size:16px;
+font-weight:bold;
 }
 
 #footer{
@@ -35,34 +37,55 @@ font-weight:bold;
 }
 
 .tabs li a{
-display:block;
 width:90px;
 text-align:center;
 }
-/*
-.tabs li{
-border-top-left-right:1px solid #C6D880;
+
+.tabs li a.inverseTab{
+  border-top-left-radius:0;
+  border-top-right-radius:0;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
 }
-.tabs li a.selected { 
-  background:#D5EDF8;
+
+.tabs li{
+  border:none;
   
-  color:#fff;
-  text-shadow: 0 0 2px black;
+}
+.tabs li a.selected {
+  border:1px solid white;
+  background:rgba(120, 200, 255, 0.9);  
+  color:rgb(32, 87, 145);
 }
 
 .tabs li a { 
   background:#567bb3;
-  border-top-left-right:1px solid #16325c;
+  border:1px solid white;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
   color:#fff;
 }
 
 .tabs li a.selected:focus, .tabs li a.selected:hover { 
+  color:rgb(32, 87, 145);
+  -webkit-box-shadow:none;
+}
+
+$shadow: inset  1px 1px 15px 2px  rgb(32, 87, 145);
+
+.tabs li a:focus, .tabs li a:hover { 
   color:#fff;
-  outline:none;
+  -webkit-border-radius: .4em;
+	   -moz-border-radius: .4em;
+	        border-radius: .4em;
+     -webkit-box-shadow: $shadow;
+			  -moz-box-shadow: $shadow;
+			    -o-box-shadow: $shadow;
+			       box-shadow: $shadow;
 }
 
 #completeness .tabs li{   
   border-bottom-left-right:1px solid #C6D880;
-  border-top:none;
-}*/
+  border:none;
+}
 
