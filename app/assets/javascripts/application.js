@@ -51,28 +51,7 @@ function hide(id)
    document.getElementById(id).style.display = "none";
 }
 
-function show(id)
-{
-   document.getElementById(id).style.display = "block";
-}
 
-function ShowAndHide(firstId, secondId)
-{
-	document.getElementById(firstId).style.display = "block";
-	document.getElementById(secondId).style.display = "none";
-}
-
-function showEditBox(id)
-{
-	document.getElementById("formProj" + id).style.display = "block";
-	document.getElementById("project" + id).style.display = "none";
-}
-
-function hideEditBox(id)
-{
-	document.getElementById("formProj" + id).style.display = "none";
-	document.getElementById("project" + id).style.display = "block";
-}
 
 
 
