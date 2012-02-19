@@ -5,6 +5,12 @@
  *= require_self
  *= require_tree . 
 */
+.b-paranja-helper:checked+.b-paranja {
+	display: none;
+}
+a{
+z-index:8;
+}
 a.b-dropdown-link{
     font-weight:normal;
     text-decoration:none;

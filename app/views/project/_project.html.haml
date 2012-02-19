@@ -31,7 +31,8 @@
                   = link_to 'Delete', "#{p.id}/delProject", method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{p.id}"
                 -if @foreign.nil?
                   =link_to 'Share', "#{p.id}/share_project", :class=>"b-dropdown-link think-link"
-        
+        %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
+        %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
     %div{:id => "formProj#{p.id}", :style => "display:none"}
       .column.span-8
         .notice

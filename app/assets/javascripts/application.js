@@ -26,18 +26,17 @@ $("#addListP").click(function(){
   $("#newList").show();
 });
 
+$(".b-paranja").click(function(){
+$(".b-paranja").css("display","none");
+});
+
 $(".b-dropdown-handle").click(function(){
   var t = $(this).parent().prev();
 
   if(!t.prop("checked"))
   {
     t.click();
-    $(this).text("–");
-  }
-  else
-  {
-    $("#Paranja").click();
-    $(this).text("+");
+    $(".b-paranja").css("display","block");
   }
 });
 
