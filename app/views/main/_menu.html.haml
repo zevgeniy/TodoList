@@ -7,10 +7,11 @@
   #userData.column.prepend-9.span-4
     %span#userLogin>
       = current_user.login
-      (#{link_to 'Sign out', signout_path, :method => :post})
+      (#{link_to 'Sign out', signout_path})
 #completeness.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
   %ul
     %li
       %a{:href => "/not_completed", :class=>@tabs_state[:incompleted] ? "selected inverseTab" : "inverseTab"} Incompleted
     %li
       %a{:href=>"/completed", :class=> @tabs_state[:completed] ? "selected inverseTab" : "inverseTab"} Completed
+%input#Paranja.b-paranja-helper{:checked => "checked", :hidden => "hidden", :name => "dropdowns", :type => "radio"}

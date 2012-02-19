@@ -1,16 +1,18 @@
+%p
+  =flash[:error]
 #loginScreen
   #signinDiv.lifted
     = form_for(:sessions, :url => session_new_path) do |f|
       .field
         = f.label :login, 'Login/email'
-        %br/
+        %br
         = f.text_field :login, :placeholder=>"login", :required => true 
       .field
         = f.label :password 
-        %br/
+        %br
         = f.password_field :password, :placeholder=>"•••", :required => true
-        %br/
-        = f.submit 'Sing in'
+        %br
+        = f.submit 'Sign in'
   #signupDiv
     New user?
     =link_to 'Sign up!', signup_path

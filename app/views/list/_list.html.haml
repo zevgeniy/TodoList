@@ -18,7 +18,7 @@
         %div.span-1.last
           %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownList#{l.id}", :cheched=>false}
           %span.b-dropdown
-            %a.b-dropdown-handle#dropdown-handle +
+            %a.b-dropdown-handle{:id=>"plusLs#{l.id}"} +
             %label.b-dropdown-handle{:for => "DropdownList#{l.id}"}
             
             %span.b-dropdown-popup

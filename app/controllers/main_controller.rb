@@ -34,12 +34,14 @@ def completed
   @tasks = Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State = 't' ORDER BY priority")
   @tasks = @tasks + current_user.tasks.where("state = ?",true)
   @tabs_state = {:completed => true}
+  @completed = true
 end
 
 def not_completed
   @tasks = Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State <> 't' ORDER BY priority")
   @tasks = @tasks + current_user.tasks.where("state = ?",false);
   @tabs_state = {:incompleted => true}
+  @completed = false
 end
 
 end

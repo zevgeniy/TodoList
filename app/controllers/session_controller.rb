@@ -9,6 +9,7 @@ class SessionController < ApplicationController
   		sign_in @user	
   		redirect_to root_path 	
   	else
+  	  flash.now[:error] = "Invalid login or password!"
   		render action: "new"
   	end  	
   end

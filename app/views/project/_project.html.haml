@@ -20,7 +20,7 @@
       %article.l-section.span-1.last
         %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownProj#{p.id}", :cheched=>false}
         %span.b-dropdown
-          %a.b-dropdown-handle#dropdown-handle +
+          %a.b-dropdown-handle{:id=>"plusPr#{p.id}"} +
           %label.b-dropdown-handle{:for => "DropdownProj#{p.id}"}
           
           %span.b-dropdown-popup
@@ -28,7 +28,7 @@
               %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
                 = link_to_function 'Edit', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"b-dropdown-link think-link"
                 -if @foreign.nil?
-                  = link_to 'Delete', "#{p.id}/delProject", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+                  = link_to 'Delete', "#{p.id}/delProject", method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{p.id}"
                 -if @foreign.nil?
                   =link_to 'Share', "#{p.id}/share_project", :class=>"b-dropdown-link think-link"
         
@@ -47,7 +47,7 @@
     You don't have any projects!
 -else
   %p.alt{:style=>"font-size:14px;"}
-    You don't have any projects
+    You don't have any projects!
 
 -if @foreign.nil?
   %hr.clear/

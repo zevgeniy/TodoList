@@ -1,2 +1,5 @@
 = render template:"main/_menu"
-= render template:"task/_tasks"
+.column.prepend-7.span-13.last
+  %h3.alt Tasks:
+  - for t in @tasks
+    = render :partial => t

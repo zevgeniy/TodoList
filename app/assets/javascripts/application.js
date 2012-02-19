@@ -32,7 +32,7 @@ $(".b-dropdown-handle").click(function(){
   if(!t.prop("checked"))
   {
     t.click();
-    $(this).text("-");
+    $(this).text("–");
   }
   else
   {
