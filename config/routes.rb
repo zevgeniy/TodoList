@@ -34,7 +34,7 @@ TodoList::Application.routes.draw do
   post ":id/share_project/del/:finded", :to =>"project#delUser", :as => "delUserFromProject"
   
   get "/completed", :to => "main#completed", :as => "completed"
-  get "/not_completed", :to => "main#not_completed", :as => "not_completed"
+  get "/incompleted", :to => "main#incompleted", :as => "incompleted"
   get "/foreign", :to => "main#foreign", :as => "foreign"
   
   delete "/deleteCompletedTasks", :to=>"task#delete_completed"
