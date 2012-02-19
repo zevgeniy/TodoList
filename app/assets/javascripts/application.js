@@ -27,7 +27,7 @@ $("#addListP").click(function(){
 });
 
 $(".b-paranja").click(function(){
-$(".b-paranja").css("display","none");
+  $(".b-paranja").css("display","none");
 });
 
 $(".b-dropdown-handle").click(function(){
@@ -51,7 +51,8 @@ function hide(id)
    document.getElementById(id).style.display = "none";
 }
 
-
-
-
-
+function ShowAndHide(firstId, secondId)
+{
+	document.getElementById(firstId).style.display = "block";
+	document.getElementById(secondId).style.display = "none";
+}

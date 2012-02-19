@@ -18,7 +18,8 @@
               =link_to 'Share', "#{task.id}/share_task",:class=>"b-dropdown-link think-link"
   - else
     .column.span-1.last
-      = task.list.project.author.login
+      %span{:style=>"float:right; color:gray; font-weight:bold;"}
+        = task.list.project.author.login
 - if task.list.project.author.id == current_user.id
   %div{:id => "formTask#{task.id}", :style => "display:none"}
     .column.span-11

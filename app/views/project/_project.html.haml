@@ -16,6 +16,9 @@
           %span{:style => "color:red"}
             = p.lists.inject(0) {|s,n| s + n.tasks.where("state <> ?", true).count}
           )
+          -if !@foreign.nil?
+            %span{:style=>"float:right; color:gray; font-weight:bold;"}
+              = p.author.login
           
       %article.l-section.span-1.last
         %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownProj#{p.id}", :cheched=>false}
@@ -26,7 +29,7 @@
           %span.b-dropdown-popup
             %span.b-dropdown-popup-in
               %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
-                = link_to_function 'Edit', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"b-dropdown-link think-link"
+                = link_to_function 'Edit', "ShowAndHide(\"formProj#{p.id}\", \"project#{p.id}\")", :class=>"b-dropdown-link think-link", :id=>"edit_link"
                 -if @foreign.nil?
                   = link_to 'Delete', "#{p.id}/delProject", method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{p.id}"
                 -if @foreign.nil?
