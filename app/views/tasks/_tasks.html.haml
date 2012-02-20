@@ -1,8 +1,8 @@
 -if !current_list.nil?
   %h3.alt Tasks:
   %hr
-  -if @tasks.where("state <> ?", true).count > 0
-    - for t in @tasks.where("state <> ?", true).order(:priority)
+  -if @tasks.where(:state=>false).count > 0
+    - for t in @tasks.where(:state=>false).order(:priority)
       = render :partial => t
   -else
     %p.alt{:onclick=>"show('newTask')", :style=>"font-size:14px;"}

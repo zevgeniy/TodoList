@@ -31,15 +31,15 @@ def foreign
 end
 
 def completed
-  @tasks = Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State = 't' ORDER BY priority")
-  @tasks = @tasks + current_user.tasks.where("state = ?",true)
+  @tasks = Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id))).where(:state => true).order(:priority)
+  @tasks = @tasks + current_user.tasks.where(:state=>true)
   @tabs_state = {:completed => true}
   @completed = true
 end
 
 def incompleted
-  @tasks = Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State <> 't' ORDER BY priority")
-  @tasks = @tasks + current_user.tasks.where("state = ?",false);
+  @tasks = Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id))).where(:state => false).order(:priority)
+  @tasks = @tasks + current_user.tasks.where(:state=>false)
   @tabs_state = {:incompleted => true}
   @completed = false
 end

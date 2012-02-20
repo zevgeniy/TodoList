@@ -42,10 +42,11 @@ class TaskController < ApplicationController
   	if params[:tasks]
   		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
   	else
-  		@users = User.all
+  		@users = User.where("id <> ?", current_user.id)
   	end 
   	@shared =  Task.find_by_id(params[:id])
-	@path = share_task_path
+	   @path = share_task_path
+	 render 'tasks/share_task'
   end
   
   def addUser
@@ -53,7 +54,7 @@ class TaskController < ApplicationController
   	if u
   	  t = Task.find_by_id(params[:id])
   		t.users << u
-  		ShareMailer.shareTask(u,t,current_user).deliver
+  		#ShareMailer.shareTask(u,t,current_user).deliver
   	end
   	redirect_to share_task_path
   end

@@ -14,7 +14,7 @@
             =p.name
           (
           %span{:style => "color:red"}
-            = p.lists.inject(0) {|s,n| s + n.tasks.where("state <> ?", true).count}
+            = p.lists.inject(0) {|s,n| s + n.tasks.where(:state=>false).count}
           )
           -if !@foreign.nil?
             %span{:style=>"float:right; color:gray; font-weight:bold;"}

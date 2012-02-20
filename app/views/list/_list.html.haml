@@ -1,5 +1,5 @@
 - if !current_project.nil?
-  %h3.alt Task's list:
+  %h3.alt Task lists:
   %hr.clear/
   - if current_project.lists.count > 0
     - for l in current_project.lists
@@ -39,7 +39,7 @@
           = link_to_function '↑', "ShowAndHide(\"ListTask#{l.id}\", \"formList#{l.id}\")", :id=>"array"
   - else
     %p#addListP.alt{:style=>"font-size:14px;"}
-      You don't have any task's lists!
+      You don't have any task lists!
   %hr
     #newList{:style => "display:none;"}
       = form_for(:lists, :url => '/newTaskList') do |f|

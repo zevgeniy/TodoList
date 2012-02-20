@@ -1,9 +1,18 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-gem 'sqlite3'
+
+
 gem 'haml-rails'
 gem 'jquery-rails'
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
@@ -22,4 +31,7 @@ group :test do
   gem 'cucumber-rails', '1.2.1'
   gem 'capybara', '1.1.2'
 end
+
+gem 'execjs'
+gem 'therubyracer'
 

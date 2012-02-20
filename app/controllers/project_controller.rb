@@ -42,7 +42,7 @@ class ProjectController < ApplicationController
 	if params[:tasks]
   		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
   	else
-  		@users = User.all
+  		@users = User.where("id <> ?", current_user.id);
   	end 
   	@shared =  Project.find_by_id(params[:id])
 	@path = share_project_path
@@ -54,7 +54,7 @@ class ProjectController < ApplicationController
   		p = Project.find_by_id(params[:id])
   		p.users << u
   		p.shares.where("user_id = ?",u.id).first.update_attributes(:author=>false)
-  		ShareMailer.shareProject(u,p,current_user).deliver
+  		#ShareMailer.shareProject(u,p,current_user).deliver
   	end
   	redirect_to share_project_path
   end

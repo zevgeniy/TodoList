@@ -16,6 +16,8 @@
               = link_to_function 'Edit', "ShowAndHide(\"formTask#{task.id}\", \"Task#{task.id}\")", :class=>"b-dropdown-link think-link"
               = link_to 'Delete', "#{task.id}/delTask", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"    
               =link_to 'Share', "#{task.id}/share_task",:class=>"b-dropdown-link think-link"
+      %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
+        %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
   - else
     .column.span-1.last
       %span{:style=>"float:right; color:gray; font-weight:bold;"}

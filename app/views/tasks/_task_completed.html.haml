@@ -3,8 +3,8 @@
 #completedTasks{:style=>"display:none;"}
   %h3.alt Completed tasks:
   %hr/
-  - if @tasks.where("state = ?", true).count > 0
-    - for t in @tasks.where("state = ?", true)
+  - if @tasks.where(:state=>true).count > 0
+    - for t in @tasks.where(:state=>true)
       #completedTask
         = check_box " ", " ",:checked => true, :onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post
         = t.name
