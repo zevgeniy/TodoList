@@ -1,5 +1,9 @@
 def valid_user
-  @user ||= {:login=>"Din", :password=>"123456", :password_confirmation=>"123456", :email=>"Din@gmail.com"}
+  @user = {:login=>"Din", :password=>"123456", :password_confirmation=>"123456", :email=>"Din@gmail.com"}
+end
+
+def second_user
+  @user = {:login=>"Cap", :password=>"123456", :password_confirmation=>"123456", :email=>"cap@gmail.com"}
 end
 
 def sign_up user

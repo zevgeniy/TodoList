@@ -30,14 +30,19 @@ When /^I created new project and sign out$/ do
 end
 
 When /^I as another user signed in$/ do
-  user = User.new(:login=>"Sam", :email=>"Sam@mail.ru", :password=>"123456", :password_confirmation=>"123456")
-  sign_up user 
-  sign_in user
+  sign_up second_user
+  sign_in second_user
+end
+
+When /^I have one project$/ do
+  user = User.last
+  project = Project.new(name:"One", user_id:user.id)
+  user.projects << project
 end
 
 ### THEN ###
 Then /^this project is displayed on the page$/ do
-  page.should have_content "Task's list:"
+  page.should have_content "Task lists:"
 end
 
 Then /^this project should disappear$/ do
@@ -45,7 +50,7 @@ Then /^this project should disappear$/ do
   page.should_not have_content "Home project"
 end
 
-Then /^I see the message (.*)$/ do |message|
+Then /^I see the message "(.*)"$/ do |message|
   page.should have_content message
 end
 
