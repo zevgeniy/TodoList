@@ -1,19 +1,14 @@
-class TaskController < ApplicationController
+class TasksController < ApplicationController
   def create
   	@task = Task.new(params[:tasks])
   	@task.list_id = current_list.id
   	@task.state = false
   	@task.priority = 2
-  	respond_to do |format|
-      if @task.save
-        format.html { redirect_to :back }
-      else
-        format.html { redirect_to :back }
-      end
-  	end	
+    @task.save    
+    redirect_to :back    
   end
 
-  def delete
+  def destroy
   	t = Task.find_by_id(params[:id])
     if !t.nil?
    	 t.destroy
@@ -29,7 +24,7 @@ class TaskController < ApplicationController
   	end
   end
   
-  def completed
+  def check
   	t = Task.find_by_id(params[:id])  	
   	if !t.nil?
   		t.state = !t.state
@@ -38,7 +33,7 @@ class TaskController < ApplicationController
   	end
   end
   
-  def share_task
+  def share
   	if params[:tasks]
   		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
   	else
@@ -46,7 +41,7 @@ class TaskController < ApplicationController
   	end 
   	@shared =  Task.find_by_id(params[:id])
 	   @path = share_task_path
-	 render 'tasks/share_task'
+	 render 'main/_share'
   end
   
   def addUser
@@ -68,7 +63,7 @@ class TaskController < ApplicationController
   end
   
   def delete_completed
-    Task.find_by_sql("SELECT * FROM Tasks Where Tasks.list_id in (SELECT list_id FROM Lists WHERE project_id in (SELECT project_id FROM Projects WHERE user_id = #{current_user.id})) AND State = 't'").each{|n| n.destroy}
+    Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id),:id => current_list.id), :state => true).destroy_all
     redirect_to :back
   end
   

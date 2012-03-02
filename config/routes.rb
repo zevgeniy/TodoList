@@ -1,44 +1,38 @@
 TodoList::Application.routes.draw do
+ 
+  get "/signup", :to => 'users#new', :as => 'signup'
+  post "/signup", :to => 'users#create'
+  
+  get "/signin", :to => 'sessions#new', :as => 'signin'
+  post "/signin", :to => 'sessions#create', :as => 'session_new'
+  get "/signout", :to => 'sessions#destroy', :as => 'signout'
 
-  get "/signup", :to => 'user#new', :as => 'signup'
-  post "/signup", :to => 'user#create'
-
-  get "/signin", :to => 'session#new', :as => 'signin'
-  post "/signin", :to => 'session#create', :as => 'session_new'
-  get "/signout", :to => 'session#destroy', :as => 'signout'
-
-  post "/newProject", :to =>  'project#create'
-  delete ":id/delProject", :to =>  'project#delete'
-  put ":id/editProject", :to =>  'project#update'
+  resources :projects, :only => [:show, :create, :destroy, :update] do
+    member do
+        get "share"
+        post "share/:finded", :to =>"projects#addUser"
+        delete "share/:finded", :to =>"projects#delUser"  
+    end
+  end 
   
-  get ":id/openProject", :to => "project#open"
+  resources :lists, :only => [:show, :create, :destroy, :update]
   
-  post "/newTaskList", :to => "list#create"
-  delete ":id/delTaskList", :to => "list#delete"
-  put ":id/editTaskList", :to => "list#update"
-  
-  get ":id/openTaskList", :to => "list#open"
-  
-  post "/newTask", :to => "task#create"
-  delete ":id/delTask", :to => "task#delete"
-  put ":id/editTask", :to => "task#update"
-  
-  get ":id/completed", :to => "task#completed"
-  
-  get ":id/share_task", :to => "task#share_task", :as => "share_task"
-  post ":id/share_task/add/:finded", :to =>"task#addUser", :as => "addUserToTask"
-  post ":id/share_task/del/:finded", :to =>"task#delUser", :as => "delUserFromTask"
-
-  get ":id/share_project", :to => "project#share_project", :as => "share_project"
-  post ":id/share_project/add/:finded", :to =>"project#addUser", :as => "addUserToProject"
-  post ":id/share_project/del/:finded", :to =>"project#delUser", :as => "delUserFromProject"
+  resources :tasks, :only => [:create, :destroy, :update] do
+    member do
+      get "share"
+      post "share/:finded", :to =>"tasks#addUser"
+      delete "share/:finded", :to =>"tasks#delUser"
+      get "check", :to => "tasks#check"  
+    end
+    collection do
+      delete "completed" => "tasks#delete_completed"
+    end
+  end
   
   get "/completed", :to => "main#completed", :as => "completed"
   get "/incompleted", :to => "main#incompleted", :as => "incompleted"
   get "/foreign", :to => "main#foreign", :as => "foreign"
-  
-  delete "/deleteCompletedTasks", :to=>"task#delete_completed"
-  
+    
   root :to => 'main#index'
 
   # The priority is based upon order of creation:

@@ -10,8 +10,8 @@
     #findedUser
       = u.login
       - if @shared.users.include? u
-        = link_to "–", @path + "/del/#{u.id}", :method=>:post, :id=>"array"
+        = link_to "–", @path + "/#{u.id}", :method=>:delete, :id=>"array"
       - else
-        = link_to "+", @path + "/add/#{u.id}", :method=>:post, :id=>"array"
+        = link_to "+", @path + "/#{u.id}", :method=>:post, :id=>"array"
 .cAlign
   = link_to "back", root_path

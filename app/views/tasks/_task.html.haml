@@ -1,6 +1,6 @@
 %div{:id => "Task#{task.id}"}
   #taskName.column.span-11
-    = check_box " ", " ",:onclick =>"top.location.href= \"#{task.id}/completed\"", :method => :post, :checked => @completed.nil? ? false : @completed
+    = check_box " ", " ",:onclick =>"top.location.href= \"tasks/#{task.id}/check\"", :checked => @completed.nil? ? false : @completed
     = task.name 
     %span#desc
       = task.description
@@ -14,8 +14,8 @@
           %span.b-dropdown-popup-in
             %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
               = link_to_function 'Edit', "ShowAndHide(\"formTask#{task.id}\", \"Task#{task.id}\")", :class=>"b-dropdown-link think-link"
-              = link_to 'Delete', "#{task.id}/delTask", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"    
-              =link_to 'Share', "#{task.id}/share_task",:class=>"b-dropdown-link think-link"
+              = link_to 'Delete', "tasks/#{task.id}", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"    
+              = link_to 'Share', "tasks/#{task.id}/share",:class=>"b-dropdown-link think-link"
       %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
         %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
   - else
@@ -26,7 +26,7 @@
   %div{:id => "formTask#{task.id}", :style => "display:none"}
     .column.span-11
       .notice
-        = form_for(:task, :url => "#{task.id}/editTask", :method => :put, :style => 'display:inline') do |f|
+        = form_for(:task, :url => "tasks/#{task.id}", :method => :put, :style => 'display:inline') do |f|
           %table
             %tr
               %td 

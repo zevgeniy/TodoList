@@ -1,4 +1,4 @@
-class ProjectController < ApplicationController
+class ProjectsController < ApplicationController
   def create  
   	@project = Project.new(params[:projects])
   	@project.user_id = current_user.id	
@@ -7,14 +7,14 @@ class ProjectController < ApplicationController
         session[:current_project_id] = @project.id
       	session[:current_list_id] = nil
       	current_list = nil
-        format.html { redirect_to root_path, notice: 'Project was successfully created.' }
+        format.html {redirect_to root_path, notice: 'Project was successfully created.'}
       else
-        format.html { redirect_to root_path }
+        format.html {redirect_to root_path}
       end
   	end	 
   end
 
-  def delete
+  def destroy
    p = Project.find_by_id(params[:id])
    if !p.nil?
    	p.destroy
@@ -25,27 +25,29 @@ class ProjectController < ApplicationController
   def update
   	p = Project.find_by_id(params[:id])
   	if !p.nil?
-  		p.update_attributes(params[:project])
+  		p.update_attributes(params[:projects])
+  		flash[:notice] = p.name
   		redirect_to :back
   	end
   	
   end
   
-  def open
+  def show
   	session[:current_project_id] = params[:id]
   	session[:current_list_id] = nil
   	current_list = nil
   	redirect_to :back
   end
 
-  def share_project
-	if params[:tasks]
-  		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
-  	else
-  		@users = User.where("id <> ?", current_user.id);
-  	end 
-  	@shared =  Project.find_by_id(params[:id])
-	@path = share_project_path
+  def share
+	  if params[:tasks]
+    		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
+    else
+    	@users = User.where("id <> ?", current_user.id);
+    end 
+    @shared =  Project.find_by_id(params[:id])
+	  @path = share_project_path
+	  render "main/_share"
   end
 
   def addUser

@@ -6,10 +6,10 @@
   - if @tasks.where(:state=>true).count > 0
     - for t in @tasks.where(:state=>true)
       #completedTask
-        = check_box " ", " ",:checked => true, :onclick =>"top.location.href= \"#{t.id}/completed\"", :method => :post
+        = check_box " ", " ",:checked => true, :onclick =>"top.location.href= \"tasks/#{t.id}/check\""
         = t.name
   - else
     %p.alt{:style=>"font-size:14px;"} A list of completed tasks is empty
   %hr/
-  =link_to "Delete completed tasks", "/deleteCompletedTasks", :method=>:delete, :class=>"button"
+  =link_to "Delete completed tasks", completed_tasks_path, :method=>:delete, :class=>"button"
   =link_to "Hide completed tasks","#", :style=>"display:block;height:30px;padding-top:10px;", :id=>"hideCompleted"

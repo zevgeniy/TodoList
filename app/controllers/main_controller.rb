@@ -10,9 +10,9 @@ def index
       @current_project = nil
       @current_list = nil      
     end 
-	  @tasks = current_list.tasks if current_list
-	  
+	  @tasks = current_list.tasks if current_list	  
 	  @tabs_state = {:index => true}
+	  render "main/_page"
   end
 end
 
@@ -28,6 +28,8 @@ def foreign
 	@foreign = true
 	
 	@tabs_state = {:foreign => true}
+	
+	render "main/_page"
 end
 
 def completed
@@ -35,6 +37,7 @@ def completed
   @tasks = @tasks + current_user.tasks.where(:state=>true)
   @tabs_state = {:completed => true}
   @completed = true
+  render "main/_all_tasks"
 end
 
 def incompleted
@@ -42,6 +45,7 @@ def incompleted
   @tasks = @tasks + current_user.tasks.where(:state=>false)
   @tabs_state = {:incompleted => true}
   @completed = false
+  render "main/_all_tasks"
 end
 
 end

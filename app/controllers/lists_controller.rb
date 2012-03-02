@@ -1,4 +1,4 @@
-class ListController < ApplicationController
+class ListsController < ApplicationController
   def create
 	@list = List.new(params[:lists])
   	@list.project_id = current_project.id
@@ -12,7 +12,7 @@ class ListController < ApplicationController
   	end	
   end
 
-  def delete
+  def destroy
 	l = List.find_by_id(params[:id])
     if !l.nil?
    	 l.destroy
@@ -28,7 +28,7 @@ class ListController < ApplicationController
   	end
   end
 
-  def open
+  def show
    	session[:current_list_id] = params[:id]
   	redirect_to :back
   end
