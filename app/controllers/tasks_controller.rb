@@ -1,47 +1,73 @@
 class TasksController < ApplicationController
   def create
   	@task = Task.new(params[:tasks])
-  	@task.list_id = current_list.id
+  	@task.list_id = params[:list_id]
   	@task.state = false
   	@task.priority = 2
-    @task.save    
-    redirect_to :back    
+  	
+  	respond_to do |format|
+  	  if @task.save
+  	    format.html { redirect_to :back}
+  	    format.json { json:@task, status: :created, location: @task}    
+  	  else
+  	    format.html { redirect_to :back}
+  	    format.json { render json: @task.errors, status: :unprocessable_entity }   
+  	  end
+  	end
+        
   end
 
   def destroy
   	t = Task.find_by_id(params[:id])
-    if !t.nil?
-   	 t.destroy
+    t.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :ok }
     end
-    redirect_to :back
   end
 
   def update
   	t = Task.find_by_id(params[:id])
-  	if !t.nil?
-  		t.update_attributes(params[:task])
-  		redirect_to :back
-  	end
+  	
+  	respond_to do |format|
+      if t.update_attributes(params[:task])
+        format.html { redirect_to :back}
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :back}
+        format.json { render json: t.errors, status: :unprocessable_entity }
+      end
+    end 
   end
   
   def check
   	t = Task.find_by_id(params[:id])  	
-  	if !t.nil?
-  		t.state = !t.state
-  		t.update_attributes(params[:task])  		
-  		redirect_to :back
-  	end
+  	t.state = !t.state
+  	
+  	respond_to do |format|
+      if t.update_attributes(params[:task])
+        format.html { redirect_to :back}
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :back}
+        format.json { render json: t.errors, status: :unprocessable_entity }
+      end
+    end 
   end
   
   def share
   	if params[:tasks]
-  		@users = User.where("login = \'#{params[:tasks][:name]}\' or email = \'#{params[:tasks][:name]}\'")
-  	else
-  		@users = User.where("id <> ?", current_user.id)
+  		@users = User.where("(login = ? or email = ?) and (login <> ? and email <> ?)",params[:tasks][:name],params[:tasks][:name], current_user.login, current_user.email)
   	end 
   	@shared =  Task.find_by_id(params[:id])
-	   @path = share_task_path
-	 render 'main/_share'
+	  @path = share_project_list_task_path(params[:project_id],params[:list_id],params[:id])
+	  
+	  respond_to do |format|
+	    format.html { render 'main/_share'}
+	    format.json { render json:@users }
+	  end 
+	  
   end
   
   def addUser
@@ -51,7 +77,11 @@ class TasksController < ApplicationController
   		t.users << u
   		#ShareMailer.shareTask(u,t,current_user).deliver
   	end
-  	redirect_to share_task_path
+  	
+  	respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+    end
   end
   
   def delUser
@@ -59,12 +89,46 @@ class TasksController < ApplicationController
   	if u
   		Task.find_by_id(params[:id]).users.destroy u
   	end
-  	redirect_to share_task_path
+  	
+  	respond_to do |format|
+  	  format.html { redirect_to :back }
+      format.json { head :no_content }
+  	end
   end
   
   def delete_completed
-    Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id),:id => current_list.id), :state => true).destroy_all
-    redirect_to :back
+    tasks = Task.where(:list_id => List.select(:id).where(:id => params[:list_id]), :state => true)
+    tasks.destroy_all
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :ok}
+    end
+    
   end
   
+  def completed
+    @tasks = Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id))).where(:state => true).order(:priority)
+    @tasks = @tasks + current_user.tasks.where(:state=>true)
+    @tabs_state = {:completed => true}
+    @completed = true
+    
+    respond_to do |format|
+      format.html { render "_all_tasks" }
+      format.json { render json:@tasks}
+    end
+    
+  end
+  
+  def incompleted
+    @tasks = Task.where(:list_id => List.select(:id).where(:project_id => Project.select(:id).where(:user_id => current_user.id))).where(:state => false).order(:priority)
+    @tasks = @tasks + current_user.tasks.where(:state=>false)
+    @tabs_state = {:incompleted => true}
+    @completed = false
+    
+    respond_to do |format|
+      format.html { render "_all_tasks" }
+      format.json { render json:@tasks }
+    end
+  end
 end

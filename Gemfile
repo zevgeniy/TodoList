@@ -5,6 +5,13 @@ gem 'rails', '3.1.3'
 
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'rails-backbone'
+
+gem "haml_assets"
+gem "ejs"
+gem "haml", git: "git://github.com/infbio/haml.git", branch: 'form_for_fix'
+
+gem 'devise'
 
 group :development do
   gem 'sqlite3'
@@ -15,6 +22,7 @@ group :production do
 end
 
 group :assets do
+  gem 'execjs'
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
@@ -32,6 +40,6 @@ group :test do
   gem 'capybara', '1.1.2'
 end
 
-gem 'execjs'
+
 gem 'therubyracer'
 

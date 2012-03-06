@@ -4,14 +4,15 @@
   = form_for(:tasks, :method => :get ) do |f|
     = f.text_field :name, :placeholder => "Enter user's login or email", :required=>true
     = f.submit "Find"
-  %hr/
-  %h3.alt Search results:
-  - for u in @users
-    #findedUser
-      = u.login
-      - if @shared.users.include? u
-        = link_to "–", @path + "/#{u.id}", :method=>:delete, :id=>"array"
-      - else
-        = link_to "+", @path + "/#{u.id}", :method=>:post, :id=>"array"
+  - if !@users.nil? && @users.size > 0
+    %hr/
+    %h3.alt Search results:
+    - for u in @users
+      #findedUser
+        = u.login
+        - if @shared.users.include? u
+          = link_to "–", @path + "/#{u.id}", :method=>:delete, :id=>"array"
+        - else
+          = link_to "+", @path + "/#{u.id}", :method=>:post, :id=>"array"
 .cAlign
   = link_to "back", root_path

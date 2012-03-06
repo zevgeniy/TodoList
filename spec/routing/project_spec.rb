@@ -1,6 +1,21 @@
 require 'spec_helper'
 
 describe 'routing to posts' do   
+  
+  it 'routes / to projects#my' do
+    { :get => "/" }.should route_to(
+      :controller => "projects",
+      :action => "my"
+    )
+  end
+  
+  it 'routes /projects/foreign to projects#foreign' do
+    { :get => "/projects/foreign" }.should route_to(
+      :controller => "projects",
+      :action => "foreign"
+    )
+  end
+  
   it 'routes /projects/:id/share to projects#share for project id' do
     { :get => "/projects/1/share" }.should route_to(
       :controller => "projects",

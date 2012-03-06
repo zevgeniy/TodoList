@@ -1,10 +1,10 @@
 - className = " "
-- if !current_project.nil? && current_project.id == project.id
+- if !@project.nil? && @project.id == project.id
   - className="success"
 - else
   - className="info"
 %div{:id => "project#{project.id}"}
-  .span-8.cursorPoiter{:onclick=>"top.location.href='projects/#{project.id}'"}
+  .span-8.cursorPoiter{:onclick=>"top.location.href='#{project_path(project.id)}'"}
     %div{:class=>className}
       %span.likeA 
         =project.name
@@ -12,7 +12,7 @@
       %span{:style => "color:red"}
         = project.lists.inject(0) {|s,n| s + n.tasks.where(:state=>false).count}
       )
-      -if !@foreign.nil?
+      -if current_tab != 1
         %span{:style=>"float:right; color:gray; font-weight:bold;"}
           = project.author.login
           
@@ -26,16 +26,16 @@
         %span.b-dropdown-popup-in
           %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
             = link_to_function 'Edit', "ShowAndHide(\"formProj#{project.id}\", \"project#{project.id}\")", :class=>"b-dropdown-link think-link", :id=>"edit_link"
-            -if @foreign.nil?
-              = link_to 'Delete', projects_path + "/#{project.id}", method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{project.id}"
-            -if @foreign.nil?
-              =link_to 'Share', "projects/#{project.id}/share", :class=>"b-dropdown-link think-link"
+            -if current_tab == 1
+              = link_to 'Delete', project, method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{project.id}"
+            -if current_tab == 1
+              =link_to 'Share', share_project_path(project), :class=>"b-dropdown-link think-link"
     %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
     %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
 %div{:id => "formProj#{project.id}", :style => "display:none"}
   .column.span-8
     .notice
-      = form_for(:projects, :url => "projects/#{project.id}",:method => :put, :style => 'display:inline') do |f|
+      = form_for(:project, :url => project,:method => :put, :style => 'display:inline') do |f|
         = f.text_field :name, :value => project.name, :placeholder=>"Project's name"
         = f.submit "Edit"
          

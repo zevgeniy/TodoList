@@ -1,0 +1,21 @@
+%div{id:"project<%= id%>"}
+  .span-8.cursorPoiter{onclick:'top.location.href="#/<%= id %>" '}
+    %div{class:"info"}
+      %span.likeA <%= name%>
+  %article.l-section.span-1.last
+    %input.b-dropdown-helper{hidden:"hidden", name:"dropdowns", type:"radio", id:"DropdownProj<%=id%>", cheched:false}
+    %span.b-dropdown
+      %a.b-dropdown-handle{id:"plusPr<%= id %>"} +
+      %label.b-dropdown-handle{for:"DropdownProj<%=id%>"}
+      
+      %span.b-dropdown-popup
+        %span.b-dropdown-popup-in
+          %span.b-dropdown-popup-inin{style:"z-index:9;"}
+            = link_to_function 'Edit', "ShowAndHide(\"formProj<%=id%>\", \"project<%=id%>\")", class:"b-dropdown-link think-link", :id=>"edit_link"
+            -if @foreign.nil?
+              = link_to 'Delete', projects_path + "/<%= id %>", method: :delete, class:"b-dropdown-link think-link",id:"plusPr<%=id%>"
+            -if @foreign.nil?
+              =link_to 'Share', "projects/<%= id %>}/share", class:"b-dropdown-link think-link"
+    %input#Paranja{type:"radio", class:"b-paranja-helper", name:"dropdowns", checked:"checked", hidden:"hidden"}
+    %label{class:"b-paranja", for:"Paranja", style:"z-index:1;"}    
+

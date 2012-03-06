@@ -1,5 +1,7 @@
 TodoList::Application.routes.draw do
  
+#  devise_for :users
+
   get "/signup", :to => 'users#new', :as => 'signup'
   post "/signup", :to => 'users#create'
   
@@ -7,33 +9,36 @@ TodoList::Application.routes.draw do
   post "/signin", :to => 'sessions#create', :as => 'session_new'
   get "/signout", :to => 'sessions#destroy', :as => 'signout'
 
-  resources :projects, :only => [:show, :create, :destroy, :update] do
+  resources :projects, :only => [:index, :show, :create, :destroy, :update] do
     member do
         get "share"
         post "share/:finded", :to =>"projects#addUser"
         delete "share/:finded", :to =>"projects#delUser"  
     end
+    collection do
+      get "my"
+      get "foreign"
+    end
+    
+    resources :lists, :only => [:show, :create, :destroy, :update] do
+      resources :tasks, :only => [:create, :destroy, :update] do
+        member do
+          get "share"
+          post "share/:finded", :to =>"tasks#addUser"
+          delete "share/:finded", :to =>"tasks#delUser"
+          get "check", :to => "tasks#check"  
+        end
+        collection do
+          delete "completed" => "tasks#delete_completed"
+        end
+      end
+    end
   end 
   
-  resources :lists, :only => [:show, :create, :destroy, :update]
+  get "/completed" => "tasks#completed", :as => "completed_tasks"
+  get "/incompleted" => "tasks#incompleted", :as => "incompleted_tasks" 
   
-  resources :tasks, :only => [:create, :destroy, :update] do
-    member do
-      get "share"
-      post "share/:finded", :to =>"tasks#addUser"
-      delete "share/:finded", :to =>"tasks#delUser"
-      get "check", :to => "tasks#check"  
-    end
-    collection do
-      delete "completed" => "tasks#delete_completed"
-    end
-  end
-  
-  get "/completed", :to => "main#completed", :as => "completed"
-  get "/incompleted", :to => "main#incompleted", :as => "incompleted"
-  get "/foreign", :to => "main#foreign", :as => "foreign"
-    
-  root :to => 'main#index'
+  root :to => 'projects#my'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,10 +1,10 @@
 - className = " "
-- if !current_list.nil? && current_list.id == list.id
+- if !@list.nil? && @list.id == list.id
   - className="success"
 - else
   - className="info"
 %div.cursorPointer{:id => "ListTask#{list.id}"}
-  .column.span-7.cursorPoiter{:onclick=>"top.location.href='lists/#{list.id}'"}
+  .column.span-7.cursorPoiter{:onclick=>"top.location.href='#{project_list_path(@project.id,list.id)}'"}
     %div{:class=>className}
       %span.likeA
         =list.name
@@ -21,12 +21,12 @@
           %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
             = link_to_function 'Edit', "ShowAndHide(\"formList#{list.id}\", \"ListTask#{list.id}\")", :class=>"b-dropdown-link think-link"
             -if @foreign.nil?
-              = link_to 'Delete', "lists/#{list.id}", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+              = link_to 'Delete', project_list_path(@project.id, list.id), confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
               
 %div{:id => "formList#{list.id}", :style => "display:none"}
   .column.span-7{:style => "display:block;"}
     .notice
-      = form_for(:list, :url => "lists/#{list.id}", :method => :put, :style => 'display:inline') do |f|
+      = form_for(:list, :url => project_list_path(@project.id, list.id), :method => :put, :style => 'display:inline') do |f|
         = f.text_field :name, :value => list.name, :placeholder => "Task's list name", :required => true
         = f.text_field :description, :value => list.description, :placeholder => "Description"
         = f.submit "Update"

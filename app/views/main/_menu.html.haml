@@ -2,16 +2,19 @@
   .column.tabs.span-10
     %ul
       %li.label Tasks:
-      %li= link_to "My", root_path, :class=> @tabs_state[:index] ? "selected" : ""
-      %li= link_to "Foreign", foreign_path, :class=> @tabs_state[:foreign] ? "selected" : ""
+      %li= link_to "My", my_projects_path#, :class=> @tabs_state[:index] ? "selected" : ""
+      %li= link_to "Foreign", foreign_projects_path#, :class=> @tabs_state[:foreign] ? "selected" : ""
   #userData.column.prepend-9.span-4
-    %span#userLogin>
+    %span#userLogin
       = current_user.login
       (#{link_to 'Sign out', signout_path})
 #completeness.column.prepend-17.span-7.last.tabs{:style => "padding-left: 680px;"}
   %ul
     %li
-      %a{:href => incompleted_path, :class=>@tabs_state[:incompleted] ? "selected inverseTab" : "inverseTab"} Incompleted
+      %a{:href => incompleted_tasks_path, :class=> "inverseTab"}Incompleted
+      =#, :class=>@tabs_state[:incompleted] ? "selected inverseTab" : "inverseTab" 
+        
     %li
-      %a{:href=>completed_path, :class=> @tabs_state[:completed] ? "selected inverseTab" : "inverseTab"} Completed
+      %a{:href=>completed_tasks_path, :class=> "inverseTab"} Completed
+      =#, :class=> @tabs_state[:completed] ? "selected inverseTab" : "inverseTab"
 %input#Paranja.b-paranja-helper{:checked => "checked", :hidden => "hidden", :name => "dropdowns", :type => "radio"}

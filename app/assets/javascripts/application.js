@@ -6,13 +6,19 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/todo_list
 //= require_tree .
+
 
 $(document).ready(function(){
 
 $("#showCompletedTasks a").click(function(){
-$("#showCompletedTasks").hide();
-$("#completedTasks").show(500);
+	$("#showCompletedTasks").hide();
+	$("#completedTasks").show(500);
 }
 );
 
@@ -32,7 +38,6 @@ $(".b-paranja").click(function(){
 
 $(".b-dropdown-handle").click(function(){
   var t = $(this).parent().prev();
-
   if(!t.prop("checked"))
   {
     t.click();
