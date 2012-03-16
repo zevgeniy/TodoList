@@ -1,0 +1,19 @@
+// Place all the styles related to the Session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#loginScreen{
+margin: 10px auto 0;
+text-align:center;
+
+}
+
+#signinDiv{
+margin:100px auto 50px;
+
+}
+
+#errorLogin{
+text-align:center;
+color:red;
+font-weight:bold;
+}

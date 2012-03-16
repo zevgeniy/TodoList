@@ -4,10 +4,14 @@ class TodoList.Views.Lists.ListView extends Backbone.View
   template: JST["backbone/templates/lists/list"]
 
   events:
-    "click .destroy" : "destroy"
+    "click .delete-list" : "destroy"
+    "click .edit-list" : "edit"
 
   tagName: "tr"
 
+  edit: () ->
+    alert("Edit")
+    
   destroy: () ->
     @model.destroy()
     this.remove()

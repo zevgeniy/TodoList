@@ -32,18 +32,6 @@ $("#addListP").click(function(){
   $("#newList").show();
 });
 
-$(".b-paranja").click(function(){
-  $(".b-paranja").css("display","none");
-});
-
-$(".b-dropdown-handle").click(function(){
-  var t = $(this).parent().prev();
-  if(!t.prop("checked"))
-  {
-    t.click();
-    $(".b-paranja").css("display","block");
-  }
-});
 
 $('#addButton a').click(function(){
   $(this).parent().prev().show(500);

@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def create
-	  @list = List.new(params[:lists])
+	  @list = List.new(params[:list])
   	@list.project_id = params[:project_id]
   	@project = Project.find_by_id(params[:project_id])
   	
@@ -42,8 +44,8 @@ class ListsController < ApplicationController
   def show
     @project = Project.find_by_id(params[:project_id])
     @projects = session[:current_tab] == 1 ? current_user.my_projects : current_user.shared_projects
+    @lists = @project.lists
    	@list = List.find_by_id(params[:id])
-   	@lists = @project.lists
    	@tasks = @list.tasks
   	
   	respond_to do |format|

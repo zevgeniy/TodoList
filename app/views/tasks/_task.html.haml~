@@ -1,0 +1,50 @@
+%div{:id => "Task#{task.id}"}
+  #taskName.column.span-11
+    = check_box " ", " ",:onclick =>"top.location.href= \"#{check_project_list_task_path(task.list.project,task.list,task)}\"", :checked => @completed.nil? ? false : @completed
+    = task.name 
+    %span#desc
+      = task.description
+  - if task.list.project.author.id == current_user.id
+    %article.l-section.span-1.last
+      %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownTask#{task.id}", :cheched=>false}
+      %span.b-dropdown
+        %a.b-dropdown-handle{:id=>"plusTs#{task.id}"} +
+        %label.b-dropdown-handle{:for => "DropdownTask#{task.id}"}
+        %span.b-dropdown-popup
+          %span.b-dropdown-popup-in
+            %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
+              = link_to_function 'Edit', "ShowAndHide(\"formTask#{task.id}\", \"Task#{task.id}\")", :class=>"b-dropdown-link think-link"
+              = link_to 'Delete', project_list_task_path(task.list.project,task.list,task), confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"    
+              = link_to 'Share', share_project_list_task_path(task.list.project,task.list,task),:class=>"b-dropdown-link think-link"
+      %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
+        %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
+  - else
+    .column.span-1.last
+      %span{:style=>"float:right; color:gray; font-weight:bold;"}
+        = task.list.project.author.login
+- if task.list.project.author.id == current_user.id
+  %div{:id => "formTask#{task.id}", :style => "display:none"}
+    .column.span-11
+      .notice
+        = form_for(:task, :url => project_list_task_path(task.list.project.id, task.list.id, task), :method => :put, :style => 'display:inline') do |f|
+          %table
+            %tr
+              %td 
+                = f.submit "Update"
+              %td{:style => "text-align:right;"}
+                = f.label :priority
+                = f.select :priority, [1,2,3], :selected => task.priority.nil? ? 2 : task.priority          
+                
+            %tr
+              %td= f.label :name
+              %td= f.text_field :name, :value => task.name
+            %tr
+              %td= f.label :description
+              %td= f.text_field :description, :value => task.description              
+            %tr
+              %td{:colspan => "2"} 
+                %strong Other users:              
+                - for u in task.users
+                  = u.login             
+    .column.span-1
+      = link_to_function '↑', "ShowAndHide(\"Task#{task.id}\", \"formTask#{task.id}\")", :method => :post, :id=>"array"

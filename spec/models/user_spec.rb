@@ -19,29 +19,50 @@ describe User do
       @user.should_not be_valid
     end 
     
-    it "should require login" do
-      @user.login = nil
-      @user.should_not be_valid
-    end
     
     it "should require email" do
       @user.email = nil
       @user.should_not be_valid
     end
   end
+
+	context "#shared_projects" do
+		before(:each) do
+			@user = User.new valid_attributes_user	
+			@user.save
+			@project = Project.new name:"first", user_id:@user.id
+			@project.save
+			@user.projects << @project
+		end
+
+		it "should return projects that were share for me" do
+			@user.shared_projects.count.should == 1
+		end
+		
+		it "should not return projects created by me" do
+			@user.shares.last.update_attributes(:author=>true)
+			@user.shared_projects.count.should == 0
+		end
+	end
+
+	context "#my_projects" do
+		before(:each) do
+			@user = User.new valid_attributes_user
+			@user.save			
+			project = Project.new name:"first", user_id:@user.id
+			project.save
+			@user.projects << project
+		end
+
+		it "should not return projects that were share for me" do
+			@user.my_projects.count.should == 0
+		end
+		
+		it "should return projects created by me" do
+			@user.shares.last.update_attributes(:author=>true)
+			@user.my_projects.count.should == 1
+		end
+	end
   
-  context "#authenticate" do
   
-    it "should return user when login and password is correct" do
-      user = User.new valid_attributes_user
-      user.save!
-      
-      user2 = User.authenticate "admin", "654357876"
-      user.should_not == user2
-      
-      user2 = User.authenticate "admin", "123456"
-      user.should == user2
-    end
-  
-  end
 end

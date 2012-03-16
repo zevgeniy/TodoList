@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!
   
   def index
     @projects = current_user.my_projects
@@ -7,10 +8,7 @@ class ProjectsController < ApplicationController
     end
   end
   
-  def my
-    if !signed_in?
-      redirect_to signin_path;
-    else
+  def my    
       @projects = current_user.my_projects
       session[:current_tab] = 1
       
@@ -18,35 +16,27 @@ class ProjectsController < ApplicationController
         format.html {render "main/_page"}
         format.json {render json:@projects}
       end
-      
-    end  
   end
   
   def foreign
-    if !signed_in?
-      redirect_to signin_path;
-    else
-      @projects = current_user.shared_projects
-      session[:current_tab] = 2
-      @foreign = true
+    @projects = current_user.shared_projects
+    session[:current_tab] = 2
+    @foreign = true
       
-      respond_to do |format|
-        format.html {render "main/_page"}
-        format.json {render json:@projects}
-      end
+    respond_to do |format|
+      format.html {render "main/_page"}
+      format.json {render json:@projects}
     end
-  end
-  
+  end  
   
   def create  
   	@project = Project.new(params[:project])
-  	@project.user_id = current_user.id	
   	respond_to do |format|
-      if @project.save && current_user.projects << @project && current_user.shares.last.update_attributes(:author=>true)
+      if current_user.projects << @project && current_user.shares.last.update_attributes(:author=>true)
         format.html { redirect_to root_path, notice: 'Project was successfully created.'}
         format.json { render json: @project, status: :created, location: @project }
       else
-        format.html {redirect_to root_path}
+        format.html { redirect_to root_path}
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
   	end	 
@@ -81,15 +71,15 @@ class ProjectsController < ApplicationController
    	@project = Project.find_by_id(params[:id])
   	@lists = @project.lists
   	respond_to do |format|
-  	  format.html {render "main/_page"}
-  	  format.json {render json:@lists}
+  	  format.html { render "main/_page" }
+  	  format.json { render json:@lists }
   	end
   	
   end
 
   def share
 	  if params[:tasks]
-      @users = User.where("(login = ? or email = ?) and (login <> ? and email <> ?)",params[:tasks][:name],params[:tasks][:name], current_user.login, current_user.email)
+      @users = User.where("email = ? and email <> ?",params[:tasks][:email], current_user.email)
     end 
     @shared =  Project.find_by_id(params[:id])
 	  @path = share_project_path
@@ -125,8 +115,6 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to :back } 
       format.json { head :no_content }
-    end
-  	
+    end  	
   end
-
 end

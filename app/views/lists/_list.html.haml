@@ -3,7 +3,7 @@
   - className="success"
 - else
   - className="info"
-%div.cursorPointer{:id => "ListTask#{list.id}"}
+%div.cursorPointer{:id => "task-list#{list.id}"}
   .column.span-7.cursorPoiter{:onclick=>"top.location.href='#{project_list_path(@project.id,list.id)}'"}
     %div{:class=>className}
       %span.likeA
@@ -11,15 +11,13 @@
       %span#desc
         =list.description
   %div.span-1.last
-    %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownList#{list.id}", :cheched=>false}
+    %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownList#{list.id}"}
     %span.b-dropdown
-      %a.b-dropdown-handle{:id=>"plusLs#{list.id}"} +
-      %label.b-dropdown-handle{:for => "DropdownList#{list.id}"}
-            
+      %label.b-dropdown-handle{for:"DropdownList#{list.id}"} +      
       %span.b-dropdown-popup
         %span.b-dropdown-popup-in
-          %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
-            = link_to_function 'Edit', "ShowAndHide(\"formList#{list.id}\", \"ListTask#{list.id}\")", :class=>"b-dropdown-link think-link"
+          %span.b-dropdown-popup-inin{style:"z-index:9;"}
+            = link_to_function 'Edit', "ShowAndHide(\"formList#{list.id}\", \"task-list#{list.id}\")", :class=>"b-dropdown-link think-link"
             -if @foreign.nil?
               = link_to 'Delete', project_list_path(@project.id, list.id), confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
               
@@ -31,4 +29,4 @@
         = f.text_field :description, :value => list.description, :placeholder => "Description"
         = f.submit "Update"
   .column.span-1
-    = link_to_function '↑', "ShowAndHide(\"ListTask#{list.id}\", \"formList#{list.id}\")", :id=>"array"
+    = link_to_function '↑', "ShowAndHide(\"task-list#{list.id}\", \"formList#{list.id}\")", :id=>"array"

@@ -5,12 +5,7 @@
  *= require_self
  *= require_tree . 
 */
-.b-paranja-helper:checked+.b-paranja {
-	display: none;
-}
-a{
-z-index:8;
-}
+
 a.b-dropdown-link{
     font-weight:normal;
     text-decoration:none;
@@ -29,15 +24,13 @@ text-align:center;
 }
 .showgrid {background:url("grid.png");}
 
-.success, .info{
+.success, .info, .notice{
 padding:5px;
+	 -webkit-border-radius: .4em;
+		-moz-border-radius: .4em;
+			 border-radius: .4em;
 }
 
-.success, .info{
-			-webkit-border-radius: .4em;
-			   -moz-border-radius: .4em;
-			        border-radius: .4em;
-}
 .success:hover, .info:hover{
 			-webkit-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
 			   -moz-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);

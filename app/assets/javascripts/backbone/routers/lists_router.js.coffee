@@ -4,28 +4,29 @@ class TodoList.Routers.ListsRouter extends Backbone.Router
     @lists.reset options.lists
 
   routes:
-    "/new"      : "newList"
-    "/index"    : "index"
-    "/:id/edit" : "edit"
-    "/:id"      : "show"
-    ".*"        : "index"
+    "/lists/new"      : "newList"
+    "/lists/index"    : "index"
+    "/lists/:id/edit" : "edit"
+    "/lists/:id"      : "show"
 
   newList: ->
     @view = new TodoList.Views.Lists.NewView(collection: @lists)
-    $("#lists").html(@view.render().el)
-
+    $("#add-list").hide()
+    $("#add-list").html(@view.render().el)
+    $("#add-list").show(500)
+    
   index: ->
     @view = new TodoList.Views.Lists.IndexView(lists: @lists)
-    $("#lists").html(@view.render().el)
+    $("#tasksList").html(@view.render().el)
 
   show: (id) ->
     list = @lists.get(id)
 
     @view = new TodoList.Views.Lists.ShowView(model: list)
-    $("#lists").html(@view.render().el)
+    $("#tasks").html(@view.render().el)
 
   edit: (id) ->
     list = @lists.get(id)
 
     @view = new TodoList.Views.Lists.EditView(model: list)
-    $("#lists").html(@view.render().el)
+    $("#task-list"+id).html(@view.render().el)  

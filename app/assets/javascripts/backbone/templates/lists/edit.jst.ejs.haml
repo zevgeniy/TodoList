@@ -1,0 +1,12 @@
+%div{id:"formList<%= id %>"}
+  .column.span-8
+    .notice
+      %form{id:"edit-project", name:"project"}   
+        %label{for:"name"}Name:
+        %input{type:"text", name:"name", id:"name", value:"<%= name %>"}
+        %br
+        %label{for:"description"}Desc:
+        %input{type:"text", name:"description", id:"description", value:"<%= description %>"}
+        %br
+        %input{type:"submit", value:"Edit"}
+        =link_to 'Cancel', "#/lists/index"

@@ -23,7 +23,7 @@ class TodoList.Views.Projects.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (project) =>
         @model = project
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "/projects/index"
 
       error: (project, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})

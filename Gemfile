@@ -9,7 +9,7 @@ gem 'rails-backbone'
 
 gem "haml_assets"
 gem "ejs"
-gem "haml", git: "git://github.com/infbio/haml.git", branch: 'form_for_fix'
+gem "haml"
 
 gem 'devise'
 

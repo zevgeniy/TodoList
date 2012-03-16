@@ -2,14 +2,14 @@
   = notice
   %h3.alt Find user
   = form_for(:tasks, :method => :get ) do |f|
-    = f.text_field :name, :placeholder => "Enter user's login or email", :required=>true
+    = f.text_field :email, :placeholder => "Enter user's login or email", :required=>true
     = f.submit "Find"
   - if !@users.nil? && @users.size > 0
-    %hr/
+    %hr
     %h3.alt Search results:
     - for u in @users
       #findedUser
-        = u.login
+        = u.email
         - if @shared.users.include? u
           = link_to "–", @path + "/#{u.id}", :method=>:delete, :id=>"array"
         - else

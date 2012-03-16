@@ -1,0 +1,14 @@
+%div.cursorPointer{id:"task-list<%=id%>"}
+  .column.span-7.cursorPoiter{onclick:'top.location.href="#/lists/<%= id %>" '}
+    %div{class:"info"}
+      %span.likeA <%= name %>
+      %span#desc <%= description %>
+  %div.span-1.last
+    %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownList<%= id %>"}/
+    %span.b-dropdown
+      %label.b-dropdown-handle{:for => "DropdownList<%= id %>"} +
+      %span.b-dropdown-popup
+        %span.b-dropdown-popup-in
+          %span.b-dropdown-popup-inin{style:"z-index:9;"}
+            %a{href:'#/lists/<%= id %>/edit', :class=>"b-dropdown-link think-link"} Edit
+            %a{href:"#/lists/<%= id %>/destroy", confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link delete-list"} Delete   

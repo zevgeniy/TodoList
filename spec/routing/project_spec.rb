@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'routing to posts' do   
   
-  it 'routes / to projects#my' do
-    { :get => "/" }.should route_to(
+  it 'routes /projects/my to projects#my' do
+    { :get => "/projects/my" }.should route_to(
       :controller => "projects",
       :action => "my"
     )

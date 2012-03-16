@@ -1,14 +1,11 @@
 TodoList::Application.routes.draw do
  
-#  devise_for :users
+  devise_for :users
 
-  get "/signup", :to => 'users#new', :as => 'signup'
-  post "/signup", :to => 'users#create'
-  
-  get "/signin", :to => 'sessions#new', :as => 'signin'
-  post "/signin", :to => 'sessions#create', :as => 'session_new'
-  get "/signout", :to => 'sessions#destroy', :as => 'signout'
-
+  authenticated :user do
+    root :to => 'projects#my'
+  end
+  resources :lists, :only => [:show, :create, :destroy, :update]
   resources :projects, :only => [:index, :show, :create, :destroy, :update] do
     member do
         get "share"

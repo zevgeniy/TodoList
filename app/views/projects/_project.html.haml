@@ -15,13 +15,11 @@
       -if current_tab != 1
         %span{:style=>"float:right; color:gray; font-weight:bold;"}
           = project.author.login
-          
-  %article.l-section.span-1.last
+
+  .span-1.last
     %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", :id=>"DropdownProj#{project.id}", :cheched=>false}
     %span.b-dropdown
-      %a.b-dropdown-handle{:id=>"plusPr#{project.id}"} +
-      %label.b-dropdown-handle{:for => "DropdownProj#{project.id}"}
-      
+      %label.b-dropdown-handle{:for => "DropdownProj#{project.id}"} +      
       %span.b-dropdown-popup
         %span.b-dropdown-popup-in
           %span.b-dropdown-popup-inin{:style=>"z-index:9;"}
@@ -30,8 +28,7 @@
               = link_to 'Delete', project, method: :delete, :class=>"b-dropdown-link think-link",:id=>"plusPr#{project.id}"
             -if current_tab == 1
               =link_to 'Share', share_project_path(project), :class=>"b-dropdown-link think-link"
-    %input#Paranja{:type=>"radio", :class=>"b-paranja-helper", :name=>"dropdowns", :checked=>"checked", :hidden=>"hidden"}
-    %label{:class=>"b-paranja", :for=>"Paranja", :style=>"z-index:1;"}
+
 %div{:id => "formProj#{project.id}", :style => "display:none"}
   .column.span-8
     .notice

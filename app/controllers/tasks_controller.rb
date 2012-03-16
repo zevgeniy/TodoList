@@ -1,14 +1,14 @@
 class TasksController < ApplicationController
+  before_filter :authenticate_user!
+  
   def create
-  	@task = Task.new(params[:tasks])
+  	@task = Task.new(params[:task])
   	@task.list_id = params[:list_id]
-  	@task.state = false
-  	@task.priority = 2
   	
   	respond_to do |format|
   	  if @task.save
   	    format.html { redirect_to :back}
-  	    format.json { json:@task, status: :created, location: @task}    
+  	    format.json { render json: @task, status: :created}    
   	  else
   	    format.html { redirect_to :back}
   	    format.json { render json: @task.errors, status: :unprocessable_entity }   
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
   
   def share
   	if params[:tasks]
-  		@users = User.where("(login = ? or email = ?) and (login <> ? and email <> ?)",params[:tasks][:name],params[:tasks][:name], current_user.login, current_user.email)
+  		@users = User.where("email = ? and email <> ?",params[:tasks][:email], current_user.email)
   	end 
   	@shared =  Task.find_by_id(params[:id])
 	  @path = share_project_list_task_path(params[:project_id],params[:list_id],params[:id])
@@ -86,9 +86,8 @@ class TasksController < ApplicationController
   
   def delUser
   	u = User.find_by_id(params[:finded])
-  	if u
-  		Task.find_by_id(params[:id]).users.destroy u
-  	end
+  	
+		Task.find_by_id(params[:id]).users.destroy(u) if u
   	
   	respond_to do |format|
   	  format.html { redirect_to :back }

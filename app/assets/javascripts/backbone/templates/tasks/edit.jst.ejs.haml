@@ -1,0 +1,14 @@
+%div{id:"formTask<%= id %>"}
+  .column.span-11
+    .notice
+      %form{id:"edit-task", name:"task"}   
+        %label{for:"name"}Name:
+        %input{type:"text", name:"name", id:"name", value:"<%= name %>"}
+        %br
+        %label{for:"description"}Desc:
+        %input{type:"text", name:"description", id:"description", value:"<%= description %>"}
+        %br
+        /%label{for:"priority"}Priority:
+        /%input{type:"select", option:[1,2,3] name:"priority", id:"priority", value:"<%= priority %>"}
+        %input{type:"submit", value:"Edit"}
+        =link_to 'Cancel', "#/tasks/index"

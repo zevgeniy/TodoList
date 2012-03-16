@@ -13,7 +13,7 @@ class TodoList.Views.Lists.EditView extends Backbone.View
     @model.save(null,
       success : (list) =>
         @model = list
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "/lists/index"
     )
 
   render : ->

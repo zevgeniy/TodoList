@@ -4,10 +4,11 @@ class TodoList.Views.Projects.ProjectView extends Backbone.View
   template: JST["backbone/templates/projects/project"]
 
   events:
-    "click .destroy" : "destroy"
-
+    "click .delete-project" : "destroy"
+    
+    
   tagName: "tr"
-
+        
   destroy: () ->
     @model.destroy()
     this.remove()

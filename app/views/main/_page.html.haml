@@ -1,66 +1,72 @@
-- if @project
-  = @project.id
- 
+/= render template:"main/script"
 = render template:"main/_menu"
-#ProjectsAndList.column.span-9.colborder
-  #projects
-    %h3.alt Projects:
-    %hr.clear/
-    - if @projects.count > 0
-      - for p in @projects
-        =render :partial => p
-    -elsif current_tab == 1
-      %p.alt{:onclick=>"show('newProj')", :style=>"font-size:14px;"}
-        You don't have any projects!
-    -else
-      %p.alt{:style=>"font-size:14px;"}
-        You don't have any projects!
-
-    -if current_tab == 1
-      %hr.clear/
-      #newProj{:style => "display:none;"}
-        = form_for(:project, :url => '/projects') do |f|
-          = f.text_field :name, :placeholder => "Project name", :required => true, :value=>""
-          = f.submit "Add"
-        = link_to_function "Cancel", "hide('newProj')"
-      #addButton
-        = link_to "Add project", "#", :class=>"button", :id => "AddButProj"
-
-  #tasksList
-    - if !@lists.nil?
-      %h3.alt Task lists:
-      %hr.clear/
-      - if @lists.count > 0
-        - for l in @lists
-          = render :partial => l
-      - else
-        %p#addListP.alt{:style=>"font-size:14px;"}
-          You don't have any task lists!
-      %hr
-        #newList{:style => "display:none;"}
-          = form_for(:lists, :url=>project_lists_path(@project.id)) do |f|
-            = f.text_field :name, :placeholder => "Task's list name", :required => true, :value=> ""
+%article.l-section
+  / Helper blocks (paranja for dropdowns)
+  %input#Paranja.b-paranja-helper{:checked => "checked", :hidden => "hidden", :name => "dropdowns", :type => "radio"}
+  %label.b-paranja{:for => "Paranja"}
+      
+  #ProjectsAndList.column.span-9.colborder
+    #projects
+      %h3.alt Projects:
+      %hr.clear
+      - if @projects.count > 0
+        - for p in @projects
+          =render :partial => p
+      -elsif current_tab == 1
+        %p.alt{:onclick=>"show('newProj')", :style=>"font-size:14px;"}
+          You don't have any projects!
+      -else
+        %p.alt{:style=>"font-size:14px;"}
+          You don't have any projects!
+    
+      -if current_tab == 1
+        %hr.clear/
+        #newProj{:style => "display:none;"}
+          = form_for(:project, :url => '/projects') do |f|
+            = f.text_field :name, :placeholder => "Project name", :required => true, :value=>""
             = f.submit "Add"
-          = link_to_function "Cancel", "hide('newList')"
+          = link_to_function "Cancel", "hide('newProj')"
         #addButton
-          = link_to "Add task list", "#", :class=>"button"
-#tasks.prepend-1.column.span-13.last
-  -if !@list.nil?
-    %h3.alt Tasks:
-    %hr
-    -if @tasks.where(:state=>false).count > 0
-      - for t in @tasks.where(:state=>false).order(:priority)
-        = render :partial => t
-    -else
-      %p.alt{:onclick=>"show('newTask')", :style=>"font-size:14px;"}
-        You don't have any tasks in this task list!
-    %hr
-    .column.span-13.last
-      #newTask{:style => "display:none;"}
-        = form_for(:tasks, :url => project_list_tasks_path(@project, @list)) do |f|
-          = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
-          = f.submit "Add", :class=>"button"
-        = link_to_function "Cancel", "hide('newTask')"
-      #addButton
-        = link_to "Add task", "#", :class=>"button"
-    = render template: 'tasks/_completed_tasks'
+          = link_to "Add project", "#", :class=>"button", :id => "AddButProj"
+      
+    
+    #tasksList
+      - if !@lists.nil?
+        %h3.alt Task lists:
+        %hr.clear/
+        - if @lists.count > 0
+          - for l in @lists
+            = render :partial => l
+        - else
+          %p#addListP.alt{:style=>"font-size:14px;"}
+            You don't have any task lists!
+        %hr
+          #newList{:style => "display:none;"}
+            = form_for(:list, :url=>project_lists_path(@project.id)) do |f|
+              = f.text_field :name, :placeholder => "Task's list name", :required => true, :value=> ""
+              = f.submit "Add"
+            = link_to_function "Cancel", "hide('newList')"
+          #addButton
+            = link_to "Add task list", "#", :class=>"button"
+
+
+  #tasks.prepend-1.column.span-13.last
+    -if !@list.nil?
+      %h3.alt Tasks:
+      %hr
+      -if @tasks.where(:state=>false).count > 0
+        - for t in @tasks.where(:state=>false).order(:priority)
+          = render :partial => t
+      -else
+        %p.alt{:onclick=>"show('newTask')", :style=>"font-size:14px;"}
+          You don't have any tasks in this task list!
+      %hr
+      .column.span-13.last
+        #newTask{:style => "display:none;"}
+          = form_for(:task, :url => project_list_tasks_path(@project, @list)) do |f|
+            = f.text_field :name, :placeholder=>"What do you want to do?", :required => true, :value=>""
+            = f.submit "Add", :class=>"button"
+          = link_to_function "Cancel", "hide('newTask')"
+        #addButton
+          = link_to "Add task", "#", :class=>"button"
+      = render template: 'tasks/_completed_tasks'

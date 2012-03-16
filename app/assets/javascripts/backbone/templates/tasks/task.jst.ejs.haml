@@ -1,0 +1,19 @@
+%div{:id => "task<%= id %>"}
+  #taskName.column.span-11
+    = check_box " ", " ",onclick:'top.location.href= "#/tasks/<%= id %>/check" '
+    <%= name %> 
+    %span#desc
+      <%= description %>
+  .span-1.last
+    %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownTask<%= id %>"}
+    %span.b-dropdown
+      %label.b-dropdown-handle{:for => "DropdownTask<%= id %>"} +
+      
+      %span.b-dropdown-popup
+        %span.b-dropdown-popup-in
+          %span.b-dropdown-popup-inin{style:"z-index:9;"}
+            %a{href:"#/tasks/<%= id%>/edit", class:"b-dropdown-link think-link", id:"edit_link"} Edit  
+            -if @foreign.nil?
+              %a{href:"#/tasks/<%= id %>/delete", method: :delete, class:"b-dropdown-link think-links delete-task"} Delete
+            -if @foreign.nil?
+              =link_to 'Share', 'tasks/<%= id %>/share', class:"b-dropdown-link think-link"      

@@ -1,24 +1,24 @@
 def valid_user
-  @user = {:login=>"Din", :password=>"123456", :password_confirmation=>"123456", :email=>"Din@gmail.com"}
+  @user = {:password=>"123456", :password_confirmation=>"123456", :email=>"din@gmail.com"}
 end
 
 def second_user
-  @user = {:login=>"Cap", :password=>"123456", :password_confirmation=>"123456", :email=>"cap@gmail.com"}
+  @user = {:password=>"123456", :password_confirmation=>"123456", :email=>"cap@gmail.com"}
 end
 
 def sign_up user
-  visit '/signup'
-  fill_in "Login", :with=>user[:login]
-  fill_in "Email", :with=>user[:email]
-  fill_in "Password", :with=>user[:password]
-  fill_in "Password confirmation", :with=>user[:password_confirmation]
-  click_button "Sign up!"
+  visit '/users/sign_up'
+  fill_in "user_email", :with=>user[:email]
+  fill_in "user_password", :with=>user[:password]
+  fill_in "user_password_confirmation", :with=>user[:password_confirmation]
+  click_button "Sign up"
 end
 
 def sign_in user
-  visit '/signin'
-  fill_in "Login/email", :with => user[:email]
-  fill_in "Password", :with => user[:password]
+  visit '/users/sign_in'
+	page.should have_content "Email"
+  fill_in 'user_email', :with => user[:email]
+  fill_in 'user_password', :with => user[:password]
   click_button "Sign in"
 end
 
@@ -29,7 +29,11 @@ end
 
 Given /^I do not exist as a user$/ do
   User.find(:first, :conditions => {:email=>valid_user[:email]}).should be_nil
-  visit '/signout'
+  visit '/users/sign_out'
+end
+
+Given /^I signed out$/ do
+	find('a', :text=>"Sign out").click
 end
 
 Given /^I exist as a user$/ do
@@ -43,25 +47,25 @@ end
 
 When /^I sign in with a wrong password$/ do
   user = valid_user.merge(:password=>"654321")
-  sign_in user
+	sign_in user
 end
 
 ### THEN ###
 Then /^I should be signed out$/ do
   page.should have_content "Sign up"
-  page.should have_content "Login/email"
+  page.should have_content "Email"
   page.should_not have_content "Sign out"
 end
 
 
 Then /^I see an invalid message$/ do
-  page.should have_content "Invalid login or password!"
+  page.should have_content "Sign in"
   page.should_not have_content "Sign out"
 end
 
 
 Then /^I see main page$/ do
-  page.should have_content valid_user[:login]
+  page.should have_content valid_user[:email]
   page.should have_content "You don't have any projects!"
 
   page.should_not have_content "Sign in"
