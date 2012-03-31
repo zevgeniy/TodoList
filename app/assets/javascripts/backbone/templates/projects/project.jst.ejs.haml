@@ -1,7 +1,6 @@
 %div{id:"project<%= id%>"}
-  .span-8.cursorPoiter{onclick:'top.location.href="#/projects/<%= id %>" '}
-    %div{class:"info"}
-      %span.likeA <%= name%>
+  %a.span-7{href:"#/projects/<%= id %>", class:"info", style:"display:block;"}
+    %span.likeA <%= name%>
   .span-1.last
     %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownProj<%= id %>"}
     %span.b-dropdown

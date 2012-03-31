@@ -12,4 +12,4 @@
           %span.b-dropdown-popup-inin{style:"z-index:9;"}
             %a{href:"#/projects/<%= id%>/edit", class:"b-dropdown-link think-link", id:"edit_link"} Edit
             %a{href:"#/projects/<%= id %>/destroy", method: :delete, class:"b-dropdown-link think-links delete-project",id:"plusPr<%=id%>"} Delete
-						%a{href:"projects/<%= id %>/share", class:"b-dropdown-link think-link"}Share
+            %a{href:"projects/<%= id %>/share", class:"b-dropdown-link think-link"}Share

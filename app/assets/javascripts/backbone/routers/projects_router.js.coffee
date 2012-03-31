@@ -97,3 +97,4 @@ class TodoList.Routers.ProjectsRouter extends Backbone.Router
     
   checkTask: (id) ->
     task = @tasks.get(id)
+    

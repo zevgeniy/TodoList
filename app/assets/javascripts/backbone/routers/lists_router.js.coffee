@@ -20,9 +20,12 @@ class TodoList.Routers.ListsRouter extends Backbone.Router
     $("#tasksList").html(@view.render().el)
 
   show: (id) ->
-    list = @lists.get(id)
-
-    @view = new TodoList.Views.Lists.ShowView(model: list)
+    project = @projects.get(id)
+    @tasks.url = '/projects/' + @lists.project_id + '/lists/' + id
+    @tasks.fetch()
+    @tasks.list_id = id
+    @tasks.url = '/projects/' + @lists.project_id + '/lists/' + id + '/tasks'
+    @view = new TodoList.Views.Tasks.IndexView(tasks: @tasks)
     $("#tasks").html(@view.render().el)
 
   edit: (id) ->

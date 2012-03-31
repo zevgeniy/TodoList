@@ -1,12 +1,11 @@
 %div.cursorPointer{id:"task-list<%=id%>"}
-  .column.span-7.cursorPoiter{onclick:'top.location.href="#/lists/<%= id %>" '}
-    %div{class:"info"}
-      %span.likeA <%= name %>
-      %span#desc <%= description %>
+  %a{class:"info column span-7", href:"#/lists/<%= id %>"}
+    %span <%= name %>
+    %span#desc <%= description %>
   %div.span-1.last
     %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownList<%= id %>"}/
     %span.b-dropdown
-      %label.b-dropdown-handle{:for => "DropdownList<%= id %>"} =+=
+      %label.b-dropdown-handle{:for => "DropdownList<%= id %>"} +
       %span.b-dropdown-popup
         %span.b-dropdown-popup-in
           %span.b-dropdown-popup-inin{style:"z-index:9;"}

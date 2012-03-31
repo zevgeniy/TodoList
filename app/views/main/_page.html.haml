@@ -1,9 +1,10 @@
-/= render template:"main/script"
 = render template:"main/_menu"
 %article.l-section
   / Helper blocks (paranja for dropdowns)
   %input#Paranja.b-paranja-helper{:checked => "checked", :hidden => "hidden", :name => "dropdowns", :type => "radio"}
   %label.b-paranja{:for => "Paranja"}
+  
+  = render template:"main/script"
       
   #ProjectsAndList.column.span-9.colborder
     #projects
@@ -44,6 +45,7 @@
           #newList{:style => "display:none;"}
             = form_for(:list, :url=>project_lists_path(@project.id)) do |f|
               = f.text_field :name, :placeholder => "Task's list name", :required => true, :value=> ""
+              = f.text_field :description, :placeholder => "description", :value=> ""
               = f.submit "Add"
             = link_to_function "Cancel", "hide('newList')"
           #addButton

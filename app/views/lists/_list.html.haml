@@ -3,13 +3,11 @@
   - className="success"
 - else
   - className="info"
-%div.cursorPointer{:id => "task-list#{list.id}"}
-  .column.span-7.cursorPoiter{:onclick=>"top.location.href='#{project_list_path(@project.id,list.id)}'"}
-    %div{:class=>className}
-      %span.likeA
-        =list.name
-      %span#desc
-        =list.description
+%div.cursorPointer{:id => "task-list#{list.id}"}  
+  %a{class:"column span-7 #{className}", style:"display:block;", href:project_list_path(@project.id,list.id)}
+    =list.name
+    %span#desc
+      =list.description
   %div.span-1.last
     %input.b-dropdown-helper{:hidden => "hidden", :name => "dropdowns", :type => "radio", id:"DropdownList#{list.id}"}
     %span.b-dropdown
@@ -19,7 +17,7 @@
           %span.b-dropdown-popup-inin{style:"z-index:9;"}
             = link_to_function 'Edit', "ShowAndHide(\"formList#{list.id}\", \"task-list#{list.id}\")", :class=>"b-dropdown-link think-link"
             -if @foreign.nil?
-              = link_to 'Delete', project_list_path(@project.id, list.id), confirm: 'Are you sure?', method: :delete, :class=>"b-dropdown-link think-link"
+              = link_to 'Delete', project_list_path(@project.id, list.id), method: :delete, confirm: 'Are you sure?', :class=>"b-dropdown-link think-link"
               
 %div{:id => "formList#{list.id}", :style => "display:none"}
   .column.span-7{:style => "display:block;"}

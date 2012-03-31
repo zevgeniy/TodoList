@@ -1,6 +1,0 @@
-%h3.alt Task lists:
-%hr
-#lists-table
-%hr
-#add-list
-  %a.button{href:"#/lists/new", id:"add-button"} Add project

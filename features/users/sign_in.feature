@@ -11,14 +11,14 @@ Feature: Sign in
       Then I should be signed out
 
     Scenario: User enters wrong password
-      Given I exist as a user
+      Given I exist as a user and signed in
 				And I signed out
       When I sign in with a wrong password
       Then I see an invalid message
         And I should be signed out
 
     Scenario: User is login with valid data
-      Given I exist as a user
+      Given I exist as a user and signed in
 				And I signed out
       When I sign in with valid credentials
       Then I see main page

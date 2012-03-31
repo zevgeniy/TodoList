@@ -4,11 +4,11 @@ class TodoList.Routers.TasksRouter extends Backbone.Router
     @tasks.reset options.tasks
 
   routes:
-    "/new"      : "newTask"
-    "/index"    : "index"
-    "/:id/edit" : "edit"
-    "/:id"      : "show"
-    ".*"        : "index"
+    "/tasks/new"      : "newTask"
+    "/tasks/index"    : "index"
+    "/tasks/:id/edit" : "edit"
+    "/tasks/:id"      : "show"
+    "/tasks/:id/check"  : "checkTask"
 
   newTask: ->
     @view = new TodoList.Views.Tasks.NewView(collection: @tasks)
@@ -29,3 +29,6 @@ class TodoList.Routers.TasksRouter extends Backbone.Router
 
     @view = new TodoList.Views.Tasks.EditView(model: task)
     $("#tasks").html(@view.render().el)
+    
+  checkTask: (id) ->
+    task = @tasks.get(id)

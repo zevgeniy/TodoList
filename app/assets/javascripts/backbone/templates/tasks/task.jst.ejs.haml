@@ -1,6 +1,6 @@
 %div{:id => "task<%= id %>"}
   #taskName.column.span-11
-    = check_box " ", " ",onclick:'top.location.href= "#/tasks/<%= id %>/check" '
+    %input{type:"checkbox", onclick:'top.location.href= "#/tasks/<%= id %>/check" '}
     <%= name %> 
     %span#desc
       <%= description %>

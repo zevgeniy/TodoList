@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     end
   end  
   
-  def create  
+  def create
   	@project = Project.new(params[:project])
   	respond_to do |format|
       if current_user.projects << @project && current_user.shares.last.update_attributes(:author=>true)
@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to root_path}
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
-  	end	 
+  	end	
   end
 
   def destroy

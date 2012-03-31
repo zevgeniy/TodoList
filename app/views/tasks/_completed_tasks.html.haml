@@ -5,7 +5,7 @@
   %hr/
   - if @tasks.where(:state=>true).count > 0
     - for t in @tasks.where(:state=>true)
-      #completedTask
+      %div{id:"completed-task#{t.id}"}
         = check_box " ", " ",:checked => true, :onclick =>"top.location.href= \"#{check_project_list_task_path(@project,@list,t)}\""
         = t.name
   - else

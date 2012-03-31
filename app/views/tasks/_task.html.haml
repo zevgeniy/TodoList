@@ -1,6 +1,6 @@
-%div{:id => "Task#{task.id}"}
+%div{:id => "task#{task.id}"}
   #taskName.column.span-11
-    = check_box " ", " ",:onclick =>"top.location.href= \"#{check_project_list_task_path(task.list.project,task.list,task)}\"", :checked => @completed.nil? ? false : @completed
+    = check_box "checkbox", "#{task.id}",:onclick =>"top.location.href= \"#{check_project_list_task_path(task.list.project,task.list,task)}\"", :checked => @completed.nil? ? false : @completed
     = task.name 
     %span#desc
       = task.description

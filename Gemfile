@@ -13,6 +13,7 @@ gem "haml"
 
 gem 'devise'
 
+gem "pry"
 group :development do
   gem 'sqlite3'
 end
@@ -38,6 +39,7 @@ group :test do
   gem 'cucumber', '1.1.4'
   gem 'cucumber-rails', '1.2.1'
   gem 'capybara', '1.1.2'
+
 end
 
 

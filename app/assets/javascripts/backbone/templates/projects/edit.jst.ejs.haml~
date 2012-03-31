@@ -3,7 +3,7 @@
     .notice
       %form{id:"edit-project", name:"project"}   
         %label{for:"name"}Name:
-        %input{type:"text", name:"name", id:"project_name", value:"<%= name %>"}
-        %input{type:"submit", value:"Update"}
+        %input{type:"text", name:"name", id:"name", value:"<%= name %>"}
+        %input{type:"submit", value:"Edit"}
         =link_to 'Cancel', "#/projects/index"
     

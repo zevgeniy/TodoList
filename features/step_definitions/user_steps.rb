@@ -36,8 +36,9 @@ Given /^I signed out$/ do
 	find('a', :text=>"Sign out").click
 end
 
-Given /^I exist as a user$/ do
+Given /^I exist as a user and signed in$/ do
   sign_up valid_user
+  wait_until { page.find_link("Add project").visible? }
 end
 
 ### WHEN ###
