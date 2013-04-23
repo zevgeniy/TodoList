@@ -8,6 +8,11 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 
 gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+gem 'omniauth-google-oauth2'
+
+gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'thin'
 gem 'rails-backbone'
@@ -32,6 +37,9 @@ gem 'jquery-rails'
 
 group :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password

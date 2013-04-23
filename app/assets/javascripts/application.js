@@ -18,5 +18,4 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/todo
-//= require facebook
 //= require_tree .

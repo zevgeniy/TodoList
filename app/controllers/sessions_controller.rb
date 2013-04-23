@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def create
+    puts env["omniauth.auth"].inspect
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     redirect_to root_url
